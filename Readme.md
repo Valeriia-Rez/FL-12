@@ -1,1 +1,1 @@
-#Project for EPAM training 
+# Project for EPAM training 
