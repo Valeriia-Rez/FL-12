@@ -1,162 +1,205 @@
-@media print{
-    .tm-sidebar, .tm-team-img, #about, .boxes, #contact, .img-fluid, .carousel-indicators{display:none;}
-    .blocks{text-align: center;align-self: center;}
+:root {
+    --main-color: #87CEFA;
+    --white: #fff;
+    --red: #ff0000;
+    --grey: #333;
+    --light-gray: #d3d3d3;
+    --burlywood: #deb887;
 }
 
-
-.tm-nav-item-link:hover {
-    background-color: lightskyblue;
-    color: #fff;
-}
-
-
-.tm-banner{
-    border: 25px solid lightskyblue;
-    padding: 0px;
-    border-image: linear-gradient(to right,lightskyblue,burlywood 100%) 1;
-}
-.tm-content-header{
-    box-shadow: 2px 1px 10px 1px rgba(61, 55, 61, 0.7);
-}
-.tm-banner-text{
-    text-shadow: 5px 5px 3px #333;
-    animation-name: moveInRight;
-    animation-duration: 4s;
-    animation-timing-function: ease-out;
-}
-
-@keyframes moveInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(200px); }
-    100% {
-        opacity: 1;
-        transform: translate(0); }
-     }
-
-
-.flex-2-col{
-    display: flex;
-    flex-direction: row;
-}
-
-.padding-medium{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.tm-section-title{
-    align-self: center;
-}
-.tm-section-description{
-    text-align: justify;
-    text-indent: 25px;
-    line-height: 30px;
-}
-
-.tm-section-title-box:hover{
-    background-color: lightgray;
-    color: lightskyblue;
-}
-
-h2{
+h2 {
     text-align: center;
-    color: lightskyblue;
+    color: var(--main-color);
 }
 
-.padding-medium ol li{
-    list-style: lower-alpha;
-}
-
-.padding-medium ol li:hover:before{
-    content: ">";
-    font-weight: bold;
-}
-
-.text{
+section {
     position: relative;
 }
-.text:after{
+
+section:before {
+    content: "";
+    position: absolute;
+    border: 20px solid transparent;
+    border-left: 20px solid var(--main-color);
+    border-top: 20px solid var(--main-color);
+}
+
+.text {
+    position: relative;
+}
+
+.text:after {
     content: "New";
-    color: red;
+    color: var(--red);
     position: absolute;
     bottom: 8px;
     font-weight: bold;
     font-size: 8px;
 }
 
-.blocks .tm-section-title{
-    text-align: left;
+.btn {
+    text-align: center;
+    background-color: var(--white);
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-radius: 3px;
+    width: 100px;
+    height: 50px;
+    float: right;
+}
+
+.btn:hover {
+    background-color: var(--white);
+    color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.flex-2-col {
+    display: flex;
+    flex-direction: row;
+}
+
+.padding-medium {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.padding-medium ol li {
+    list-style: lower-alpha;
+}
+
+.padding-medium ol li:hover:before {
+    content: ">";
+    font-weight: bold;
+}
+
+.tm-nav-item-link:hover {
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+.tm-banner {
+    border: 25px solid var(--main-color);
+    padding: 0;
+    border-image: linear-gradient(to right, var(--main-color), var(--burlywood) 100%) 1;
+}
+
+.tm-banner-inner {
+    border: none;
+}
+
+.tm-banner-text {
+    text-shadow: 5px 5px 3px var(--grey);
+    animation: moveInRight 4s ease-out;
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+.tm-section-title {
+    align-self: center;
+}
+
+.tm-section-description {
+    text-align: justify;
+    text-indent: 25px;
+    line-height: 30px;
+}
+
+.tm-section-title-box:hover {
+    background-color: var(--light-gray);
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.blocks .tm-section-title {
     align-self: flex-start;
 }
 
-.blocks .tm-section-description:nth-child(2){
+.blocks .tm-section-description:nth-child(2),
+.blocks .tm-section-title {
     text-align: left;
 }
 
-.blocks .tm-section-description:last-child{
+.blocks .tm-section-description:last-child {
     letter-spacing: 5px;
     word-spacing: 10px;
     font-style: italic;
 }
 
-/*.gallery-container:nth-child(2n+1){
-    background-color: lightskyblue;
+.carousel-description {
+    text-align: center;
+}
 
-    
-}*/
-
-.box p::first-letter{
+.box p::first-letter {
     font-weight: bold;
 }
 
-#contact .tm-section-title{
+#contact .tm-section-title {
     align-self: flex-start;
 }
-#contact_name:hover{
-    background-color: lightskyblue;
-}
-#contact_email:hover{
-    background-color: lightskyblue;
-}
-#contact_name,#contact_email,#contact_subject{
-    border-bottom: 1px solid lightskyblue;
-}
-#contact_message{
-    border: 1px solid lightskyblue;
+
+#contact_name,
+#contact_email,
+#contact_subject {
+    border-bottom: 1px solid var(--main-color);
 }
 
-.btn{
-    text-align: center;
-    background-color: white;
-    color: lightskyblue;
-    border:1px solid lightskyblue;
-    border-radius: .20rem;
-    width: 100px;
-    height: 50px;
-    float: right;
-}
-.btn:hover{
-    background-color: #ffffff;
-    color: lightskyblue;
-    border-color: lightskyblue;
+#contact_message {
+    border: 1px solid var(--main-color);
+    background: url("../img/email-icon.png") no-repeat right 10px bottom 10px;
+    background-size: 30px;
 }
 
-
-.tm-main-nav{
-    box-shadow:2px 1px 10px 1px rgba(61, 55, 61,0.7);
+#contact_name:focus,
+#contact_email:focus {
+    background-color: var(--main-color);
 }
 
-
-section{
-    box-shadow:2px 1px 10px 1px rgba(61, 55, 61,0.7);
-    position: relative;
-
+.tm-main-nav,
+section,
+.tm-content-header {
+    box-shadow: 2px 1px 10px 1px rgba(61, 55, 61, 0.7);
 }
-section:before{
-    content: "";
-    position: absolute;
-    border: 20px solid transparent;
-    border-left: 20px solid lightskyblue;
-    border-top: 20px solid lightskyblue;
+
+.box-work {
+    padding: 10px;
+}
+
+.box-work:nth-child(2n+1) h2 {
+    color: var(--white);
+}
+
+.box-work:nth-child(2n+1) {
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+@media print {
+    #about,
+    #contact,
+    .tm-sidebar,
+    .tm-team-img,
+    .boxes,
+    .img-fluid,
+    .carousel-indicators {
+        display: none;
+    }
+    .blocks {
+        text-align: center;
+        align-self: center;
+    }
+    .tm-banner {
+        border: 1px solid silver;
+        border-image: none;
+    }
 }
