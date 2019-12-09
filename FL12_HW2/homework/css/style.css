@@ -24,19 +24,6 @@ section:before {
     border-top: 20px solid var(--main-color);
 }
 
-.text {
-    position: relative;
-}
-
-.text:after {
-    content: "New";
-    color: var(--red);
-    position: absolute;
-    bottom: 8px;
-    font-weight: bold;
-    font-size: 8px;
-}
-
 .btn {
     text-align: center;
     background-color: var(--white);
@@ -56,8 +43,6 @@ section:before {
 
 .flex-2-col {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
 }
 
 .padding-medium {
@@ -176,6 +161,19 @@ section,
     color: var(--white);
 }
 
+.tm-content-box .text {
+    position: relative;
+}
+
+.tm-content-box .text:after {
+    content: "New";
+    color: var(--red);
+    position: absolute;
+    bottom: 8px;
+    font-weight: bold;
+    font-size: 8px;
+}
+
 @media print {
     #about,
     #contact,
@@ -183,7 +181,9 @@ section,
     .tm-team-img,
     .boxes,
     .img-fluid,
-    .carousel-indicators {
+    .carousel-indicators,
+    section:before,
+    .text:after {
         display: none;
     }
     #about {
@@ -192,7 +192,6 @@ section,
     section:before,
     .text:after {
         content: "";
-        display: none;
     }
     .tm-team-description-container {
         max-width: 600px;
@@ -204,6 +203,9 @@ section,
     .tm-banner {
         border: 1px solid silver;
         border-image: none;
+    }
+    .tm-banner-text {
+        animation: none;
     }
     .tm-main-content,
     section,
@@ -218,28 +220,27 @@ section,
         text-indent: 10px;
         text-align: center;
         line-height: 25px;
-        align-self: center;
     }
     .padding-medium ol {
-        width: 70%;
-        overflow: hidden;
+        width: 50%;
         margin: 0 auto;
+        padding: 0;
     }
     .padding-medium ol li {
         list-style: none;
-        width: 50%;
-        padding: 5px 40px 10px 0px;
-        float: right;
     }
     .padding-medium ol li:nth-child(2n+1) {
         text-align: right;
     }
     .blocks .tm-section-title {
-        text-align: center;
         align-self: center;
     }
     .tm-section-title {
-        margin-bottom: 10px;
-        margin-top: 20px;
+        margin: 20px 0 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    .tm-footer {
+        padding: 0;
     }
 }
