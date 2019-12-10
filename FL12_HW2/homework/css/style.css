@@ -5,6 +5,7 @@
     --grey: #333;
     --light-gray: #d3d3d3;
     --burlywood: #deb887;
+    --silver: #c0c0c0;
 }
 
 h2 {
@@ -189,37 +190,15 @@ section,
     #about {
         margin: 0;
     }
-    section:before,
-    .text:after {
-        content: "";
-    }
-    .tm-team-description-container {
-        max-width: 600px;
-    }
-    .tm-main-content,
-    .tm-content-box {
-        width: 600px;
-    }
-    .tm-banner {
-        border: 1px solid silver;
-        border-image: none;
-    }
-    .tm-banner-text {
-        animation: none;
-    }
     .tm-main-content,
     section,
     .padding-medium,
     .carousel {
         padding: 0;
     }
-    .tm-content-box {
-        margin: 0;
-    }
-    .tm-section-description {
-        text-indent: 10px;
-        text-align: center;
-        line-height: 25px;
+    section:before,
+    .text:after {
+        content: "";
     }
     .padding-medium ol {
         width: 50%;
@@ -231,6 +210,28 @@ section,
     }
     .padding-medium ol li:nth-child(2n+1) {
         text-align: right;
+    }
+    .tm-team-description-container {
+        max-width: 600px;
+    }
+    .tm-main-content,
+    .tm-content-box {
+        width: 600px;
+    }
+    .tm-banner {
+        border: 1px solid var(--silver);
+        border-image: none;
+    }
+    .tm-banner-text {
+        animation: none;
+    }
+    .tm-content-box {
+        margin: 0;
+    }
+    .tm-section-description {
+        text-indent: 10px;
+        text-align: center;
+        line-height: 25px;
     }
     .blocks .tm-section-title {
         align-self: center;
