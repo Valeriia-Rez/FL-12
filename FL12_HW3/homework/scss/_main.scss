@@ -10,16 +10,18 @@
 body {
     box-sizing: border-box;
     width: 1500px;
+    font-family: 'Hind', sans-serif;
+    color: $colorBlack;
+    background-color: $colorWhite;
 }
 
 .header {
     height: 70vh;
-    background-image: linear-gradient(to right bottom, rgba(180, 199, 176, 0.1), rgba(83, 90, 88, 0.1)), url(../img/m-h-day.jpg);
+    background-image: $bgImage;
     background-size: cover;
-    background-position: $center;
+    background-position: center;
     border-bottom-right-radius: 40%;
-    position: $position;
-    font-family: $fontFamily;
+    position: relative;
     &-wrap {
         margin-left: 170px;
         .landing-logo {
@@ -31,8 +33,8 @@ body {
                 display: flex;
                 flex-direction: column;
                 padding-left: 15px;
-                text-align: $center;
-                font-weight: $fontWeight;
+                text-align: center;
+                font-weight: bold;
                 font-size: 20px;
             }
             span {
@@ -41,12 +43,13 @@ body {
         }
     }
     &_heading {
-        font-weight: $fontWeight;
+        font-weight: bold;
         font-size: 60px;
         padding-top: 30px;
         width: 430px;
         opacity: 0.6;
-        position: $position;
+        position: relative;
+        font-family: 'Source Sans Pro', sans-serif;
         &:before {
             content: "";
             background-color: $deepSkyBlue;
@@ -82,22 +85,22 @@ body {
 .section {
     padding: 25px 0 150px 0;
     &_text {
-        text-align: $center;
+        text-align: center;
         font-size: 35px;
-        font-family: $fontFamily;
-        position: $position;
+        font-family: 'Source Sans Pro', sans-serif;
+        position: relative;
         &:before {
             content: "";
             background-color: $darkTurquoise;
             width: 150px;
-            height: 35px;
+            height: 36px;
             z-index: -1;
             position: absolute;
             left: 760px;
         }
     }
     &_banner {
-        background: linear-gradient(to right, $yellowGreen, $colorBlue);
+        background: $bgBanner;
         width: 900px;
         height: 130px;
         border-radius: 5px;
@@ -106,16 +109,29 @@ body {
         z-index: 2;
         margin-top: 85px;
         &_heading {
-            font-weight: $fontWeight;
+            font-weight: bold;
             font-size: 28px;
+            opacity: 0.6;
+            position: relative;
+            &:before {
+                content: "";
+                position: absolute;
+                background-color: $deepSkyBlue;
+                width: 57px;
+                height: 43px;
+                z-index: -1;
+                left: 115px;
+                bottom: 2px;
+            }
         }
         &_text {
-            font-size: 16px;
+            font-size: 14px;
+            padding-top: 10px;
             color: $colorSilver;
             &_wrap {
                 margin: 25px 0 0 100px;
                 line-height: 30px;
-                position: $position;
+                position: relative;
             }
         }
         &_button {
@@ -135,7 +151,7 @@ body {
         display: flex;
         flex-direction: row;
         width: 70%;
-        align-items: $center;
+        align-items: center;
         background-color: $darkColor;
         padding: 10px;
         margin: 20px;
@@ -147,25 +163,26 @@ body {
             height: 200px;
         }
         &_text {
-            font-size: 14px;
+            font-size: 12px;
             padding-bottom: 20px;
             color: $colorSilver;
             text-align: justify;
             width: 350px;
-            font-family: $fontFamily;
         }
         &_heading {
             font-size: 20px;
-            text-align: $center;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-align: center;
             padding: 30px 0 30px 0;
         }
         &_right_container {
             color: $colorWhite;
             padding-left: 70px;
             padding-right: 40px;
+            opacity: 0.9;
             .section_link {
                 color: $colorSilver;
-                font-size: 10px;
+                font-size: 12px;
                 padding-left: 150px;
             }
         }
@@ -180,7 +197,7 @@ body {
         flex-direction: row;
         justify-content: space-around;
         padding-top: 80px;
-        align-items: $center;
+        align-items: center;
         font-size: 12px;
         color: $colorSilver;
     }
@@ -189,15 +206,19 @@ body {
         p {
             display: flex;
             flex-direction: column;
-            text-align: $center;
+            text-align: center;
             line-height: 20px;
-            font-size: 18px;
+            font-size: 20px;
+            padding: 5px 0 0 10px;
         }
     }
     &_text {
         width: 230px;
     }
+    .footer-cr {
+        font-size: 12px;
+    }
     span {
-        font-size: 10px;
+        font-size: 8px;
     }
 }

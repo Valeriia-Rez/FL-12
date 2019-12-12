@@ -1,16 +1,12 @@
 //Color
 $colorWhite: #fff;
+$colorBlack:#000;
 $colorSilver:#C0C0C0;
 $deepSkyBlue:#00BFFF;
 $darkTurquoise:#00CED1;
 $darkColor: #001f35;
 $yellowGreen:rgb(111, 153, 28);
 $colorBlue: rgb(47, 82, 187);
-//
-$fontWeight:bold;
-//
-$position: relative;
-$center: center;
-//
-$fontFamily:'Source Sans Pro',
-sans-serif;
+$bgImage:linear-gradient(to right bottom, rgba(180, 199, 176, 0.1), rgba(83, 90, 88, 0.1)),
+url(../img/m-h-day.jpg);
+$bgBanner:linear-gradient(to right, $yellowGreen, $colorBlue);
