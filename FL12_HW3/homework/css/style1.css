@@ -16,155 +16,156 @@ body {
   background-position: center;
   border-bottom-right-radius: 40%;
   position: relative;
-  font-family: 'Source Sans Pro', sans-serif; }
+  font-family: "Source Sans Pro", sans-serif; }
+  .header-wrap {
+    margin-left: 170px; }
+    .header-wrap .landing-logo {
+      display: flex;
+      flex-direction: row;
+      padding-top: 30px;
+      opacity: 0.6; }
+      .header-wrap .landing-logo p {
+        display: flex;
+        flex-direction: column;
+        padding-left: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px; }
+      .header-wrap .landing-logo span {
+        font-size: 10px; }
   .header_heading {
     font-weight: bold;
     font-size: 60px;
     padding-top: 30px;
     width: 430px;
-    opacity: 0.6; }
+    opacity: 0.6;
+    position: relative; }
+    .header_heading:before {
+      content: "";
+      background-color: #00BFFF;
+      width: 250px;
+      height: 40px;
+      z-index: -1;
+      position: absolute;
+      top: 130px; }
   .header_text {
     padding-top: 30px;
     text-align: justify;
     font-size: 13px;
     width: 500px;
     opacity: 0.6; }
-  .header-wrap {
-    margin-left: 170px; }
   .header_button {
     margin-top: 40px;
-    background-color: #6B8E23;
+    background-color: #6f991c;
     border: none;
     color: #fff;
     width: 100px;
     height: 35px;
     border-radius: 2px; }
-
-.login {
-  color: #fff;
-  padding-left: 120px; }
-
-.landing-logo {
-  display: flex;
-  flex-direction: row;
-  padding-top: 30px;
-  opacity: 0.6; }
-
-.landing-logo p {
-  display: flex;
-  flex-direction: column;
-  padding-left: 15px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 20px; }
-
-.landing-logo span {
-  font-size: 10px; }
+  .header .login {
+    color: #fff;
+    padding-left: 120px; }
 
 .section {
   padding: 25px 0 150px 0; }
-
-.section_text {
-  text-align: center;
-  font-size: 35px;
-  font-family: 'Source Sans Pro', sans-serif; }
-
-.section_card_wrap {
-  margin-left: 350px; }
-
-.section_card {
-  display: flex;
-  flex-direction: row;
-  width: 70%;
-  align-items: center;
-  background-color: #09090aec;
-  padding: 10px;
-  margin: 20px;
-  height: 220px; }
-
-.section_card_img {
-  height: 200px; }
-
-.section_card_right_container {
-  color: #fff;
-  padding-left: 70px;
-  padding-right: 40px; }
-
-.section_card_heading {
-  font-size: 20px;
-  text-align: center;
-  padding: 30px 0 30px 0; }
-
-.section_card_text {
-  font-size: 14px;
-  padding-bottom: 20px;
-  color: #f8f2f28a;
-  text-align: justify;
-  width: 350px;
-  font-family: 'Source Sans Pro', sans-serif; }
-
-.section_card_right_container .section_link {
-  color: #f8f2f28a;
-  font-size: 10px;
-  padding-left: 150px; }
-
-.section_banner {
-  background: linear-gradient(to right, #14bd22, #4636d8);
-  width: 900px;
-  height: 100px;
-  border-radius: 5px;
-  position: absolute;
-  left: 320px;
-  z-index: 2;
-  margin-top: 100px; }
-
-.section_banner_text_wrap {
-  margin: 15px 0 0 100px;
-  line-height: 30px;
-  position: relative; }
-
-.section_banner_heading {
-  font-weight: bold;
-  font-size: 25px; }
-
-.section_banner_text {
-  font-size: 12px;
-  color: #f8f2f28a; }
-
-.section_banner_button {
-  float: right;
-  background-color: #008b00;
-  border: none;
-  color: #f8f2f2dc;
-  width: 100px;
-  height: 30px;
-  border-radius: 5px;
-  position: absolute;
-  bottom: 35px;
-  right: 100px; }
+  .section_text {
+    text-align: center;
+    font-size: 35px;
+    font-family: "Source Sans Pro", sans-serif;
+    position: relative; }
+    .section_text:before {
+      content: "";
+      background-color: #00CED1;
+      width: 150px;
+      height: 35px;
+      z-index: -1;
+      position: absolute;
+      left: 760px; }
+  .section_banner {
+    background: linear-gradient(to right, #6f991c, #2f52bb);
+    width: 900px;
+    height: 130px;
+    border-radius: 5px;
+    position: absolute;
+    left: 320px;
+    z-index: 2;
+    margin-top: 85px; }
+    .section_banner_heading {
+      font-weight: bold;
+      font-size: 28px; }
+    .section_banner_text {
+      font-size: 16px;
+      color: #C0C0C0; }
+      .section_banner_text_wrap {
+        margin: 25px 0 0 100px;
+        line-height: 30px;
+        position: relative; }
+    .section_banner_button {
+      float: right;
+      background-color: #6f991c;
+      border: none;
+      color: #fff;
+      width: 100px;
+      height: 30px;
+      border-radius: 5px;
+      position: absolute;
+      bottom: 50px;
+      right: 100px; }
+  .section_card {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    align-items: center;
+    background-color: #001f35;
+    padding: 10px;
+    margin: 20px;
+    height: 220px; }
+    .section_card_wrap {
+      margin-left: 350px; }
+    .section_card_img {
+      height: 200px; }
+    .section_card_text {
+      font-size: 14px;
+      padding-bottom: 20px;
+      color: #C0C0C0;
+      text-align: justify;
+      width: 350px;
+      font-family: "Source Sans Pro", sans-serif; }
+    .section_card_heading {
+      font-size: 20px;
+      text-align: center;
+      padding: 30px 0 30px 0; }
+    .section_card_right_container {
+      color: #fff;
+      padding-left: 70px;
+      padding-right: 40px; }
+      .section_card_right_container .section_link {
+        color: #C0C0C0;
+        font-size: 10px;
+        padding-left: 150px; }
 
 .footer {
-  background-color: #070720ec;
+  background-color: #001f35;
   height: 180px; }
-
-.footer-wrap {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding-top: 80px;
-  align-items: center;
-  font-size: 12px;
-  color: #f8f2f28a; }
-
-.footer_logo p {
-  color: #fff;
-  font-size: 20px;
-  padding-bottom: 5px; }
-
-.footer_text {
-  width: 230px; }
-
-.footer_logo span {
-  font-size: 10px; }
+  .footer-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 80px;
+    align-items: center;
+    font-size: 12px;
+    color: #C0C0C0; }
+  .footer_logo {
+    display: flex; }
+    .footer_logo p {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      line-height: 20px;
+      font-size: 18px; }
+  .footer_text {
+    width: 230px; }
+  .footer span {
+    font-size: 10px; }
 
 /*# sourceMappingURL=style1.css.map */
