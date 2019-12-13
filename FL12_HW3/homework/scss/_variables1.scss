@@ -1,12 +1,14 @@
 //Color
-$colorWhite: #fff;
-$colorBlack:#000;
+$primary: #fff;
+$secondary:rgba(24, 23, 23, 0.753);
+$colorSection:#000;
+$headerText:#333;
 $colorSilver:#C0C0C0;
-$deepSkyBlue:#00BFFF;
-$darkTurquoise:#00CED1;
-$darkColor: #001f35;
-$yellowGreen:rgb(111, 153, 28);
-$colorBlue: rgb(47, 82, 187);
+$bgColorHeading:#00BFFF;
+$bgColoSection:#00CED1;
+$bgColorCardFoot: #001f35;
+$bgColorBut:rgb(111, 153, 28);
+$colorBgBanner: rgb(47, 82, 187);
 $bgImage:linear-gradient(to right bottom, rgba(180, 199, 176, 0.1), rgba(83, 90, 88, 0.1)),
 url(../img/m-h-day.jpg);
-$bgBanner:linear-gradient(to right, $yellowGreen, $colorBlue);
+$bgBanner:linear-gradient(to right, $bgColorBut, $colorBgBanner);

@@ -1,3 +1,19 @@
+.header_heading:before, .section_banner_heading:before {
+  content: "";
+  position: absolute;
+  background-color: #00BFFF;
+  z-index: -1; }
+
+.header-wrap .landing-logo p, .footer_logo p {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 20px; }
+
+.header-wrap .landing-logo, .section_card, .footer-wrap {
+  display: flex;
+  flex-direction: row; }
+
 *,
 *::after,
 *::before {
@@ -22,48 +38,41 @@ body {
   .header-wrap {
     margin-left: 170px; }
     .header-wrap .landing-logo {
-      display: flex;
-      flex-direction: row;
       padding-top: 30px;
-      opacity: 0.6; }
+      line-height: 15px; }
       .header-wrap .landing-logo p {
-        display: flex;
-        flex-direction: column;
-        padding-left: 15px;
-        text-align: center;
+        padding-left: 10px;
         font-weight: bold;
-        font-size: 20px; }
+        padding-top: 6px;
+        color: rgba(24, 23, 23, 0.753); }
       .header-wrap .landing-logo span {
-        font-size: 10px; }
+        font-size: 8px; }
   .header_heading {
     font-weight: bold;
     font-size: 60px;
     padding-top: 30px;
     width: 430px;
-    opacity: 0.6;
     position: relative;
-    font-family: 'Source Sans Pro', sans-serif; }
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 60px;
+    color: rgba(24, 23, 23, 0.753); }
     .header_heading:before {
-      content: "";
-      background-color: #00BFFF;
       width: 250px;
       height: 40px;
-      z-index: -1;
-      position: absolute;
       top: 130px; }
   .header_text {
     padding-top: 30px;
+    margin-bottom: 40px;
     text-align: justify;
     font-size: 13px;
     width: 500px;
-    opacity: 0.6; }
+    color: #333; }
   .header_button {
-    margin-top: 40px;
     background-color: #6f991c;
     border: none;
     color: #fff;
     width: 100px;
-    height: 35px;
+    height: 30px;
     border-radius: 2px; }
   .header .login {
     color: #fff;
@@ -96,15 +105,11 @@ body {
     .section_banner_heading {
       font-weight: bold;
       font-size: 28px;
-      opacity: 0.6;
-      position: relative; }
+      position: relative;
+      color: rgba(24, 23, 23, 0.753); }
       .section_banner_heading:before {
-        content: "";
-        position: absolute;
-        background-color: #00BFFF;
         width: 57px;
         height: 43px;
-        z-index: -1;
         left: 115px;
         bottom: 2px; }
     .section_banner_text {
@@ -116,19 +121,16 @@ body {
         line-height: 30px;
         position: relative; }
     .section_banner_button {
-      float: right;
+      position: absolute;
+      bottom: 50px;
+      right: 100px;
       background-color: #6f991c;
       border: none;
       color: #fff;
       width: 100px;
       height: 30px;
-      border-radius: 5px;
-      position: absolute;
-      bottom: 50px;
-      right: 100px; }
+      border-radius: 2px; }
   .section_card {
-    display: flex;
-    flex-direction: row;
     width: 70%;
     align-items: center;
     background-color: #001f35;
@@ -152,33 +154,26 @@ body {
       padding: 30px 0 30px 0; }
     .section_card_right_container {
       color: #fff;
-      padding-left: 70px;
-      padding-right: 40px;
-      opacity: 0.9; }
+      padding: 0 70px 0 70px;
+      opacity: 0.9;
+      font-size: 12px; }
       .section_card_right_container .section_link {
         color: #C0C0C0;
-        font-size: 12px;
         padding-left: 150px; }
 
 .footer {
   background-color: #001f35;
   height: 180px; }
   .footer-wrap {
-    display: flex;
-    flex-direction: row;
     justify-content: space-around;
     padding-top: 80px;
     align-items: center;
-    font-size: 12px;
+    font-size: 11px;
     color: #C0C0C0; }
   .footer_logo {
     display: flex; }
     .footer_logo p {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
       line-height: 20px;
-      font-size: 20px;
       padding: 5px 0 0 10px; }
   .footer_text {
     width: 230px; }

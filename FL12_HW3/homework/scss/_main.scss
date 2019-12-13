@@ -1,224 +1,231 @@
-@import"variables1";
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-}
-
-body {
-    box-sizing: border-box;
-    width: 1500px;
-    font-family: 'Hind', sans-serif;
-    color: $colorBlack;
-    background-color: $colorWhite;
-}
-
-.header {
-    height: 70vh;
-    background-image: $bgImage;
-    background-size: cover;
-    background-position: center;
-    border-bottom-right-radius: 40%;
-    position: relative;
-    &-wrap {
-        margin-left: 170px;
-        .landing-logo {
-            display: flex;
-            flex-direction: row;
-            padding-top: 30px;
-            opacity: 0.6;
-            p {
-                display: flex;
-                flex-direction: column;
-                padding-left: 15px;
-                text-align: center;
-                font-weight: bold;
-                font-size: 20px;
-            }
-            span {
-                font-size: 10px;
-            }
-        }
-    }
-    &_heading {
-        font-weight: bold;
-        font-size: 60px;
-        padding-top: 30px;
-        width: 430px;
-        opacity: 0.6;
-        position: relative;
-        font-family: 'Source Sans Pro', sans-serif;
-        &:before {
-            content: "";
-            background-color: $deepSkyBlue;
-            width: 250px;
-            height: 40px;
-            z-index: -1;
-            position: absolute;
-            top: 130px;
-        }
-    }
-    &_text {
-        padding-top: 30px;
-        text-align: justify;
-        font-size: 13px;
-        width: 500px;
-        opacity: 0.6;
-    }
-    &_button {
-        margin-top: 40px;
-        background-color: $yellowGreen;
-        border: none;
-        color: $colorWhite;
-        width: 100px;
-        height: 35px;
-        border-radius: 2px;
-    }
-    .login {
-        color: $colorWhite;
-        padding-left: 120px;
-    }
-}
-
-.section {
-    padding: 25px 0 150px 0;
-    &_text {
-        text-align: center;
-        font-size: 35px;
-        font-family: 'Source Sans Pro', sans-serif;
-        position: relative;
-        &:before {
-            content: "";
-            background-color: $darkTurquoise;
-            width: 150px;
-            height: 36px;
-            z-index: -1;
-            position: absolute;
-            left: 760px;
-        }
-    }
-    &_banner {
-        background: $bgBanner;
-        width: 900px;
-        height: 130px;
-        border-radius: 5px;
-        position: absolute;
-        left: 320px;
-        z-index: 2;
-        margin-top: 85px;
-        &_heading {
-            font-weight: bold;
-            font-size: 28px;
-            opacity: 0.6;
-            position: relative;
-            &:before {
-                content: "";
-                position: absolute;
-                background-color: $deepSkyBlue;
-                width: 57px;
-                height: 43px;
-                z-index: -1;
-                left: 115px;
-                bottom: 2px;
-            }
-        }
-        &_text {
-            font-size: 14px;
-            padding-top: 10px;
-            color: $colorSilver;
-            &_wrap {
-                margin: 25px 0 0 100px;
-                line-height: 30px;
-                position: relative;
-            }
-        }
-        &_button {
-            float: right;
-            background-color: $yellowGreen;
+        @import"variables1";
+        @mixin button {
+            background-color: $bgColorBut;
             border: none;
-            color: $colorWhite;
+            color: $primary;
             width: 100px;
             height: 30px;
-            border-radius: 5px;
+            border-radius: 2px;
+        }
+        
+        @mixin link($color, $padding) {
+            color: $color;
+            padding-left: $padding;
+        }
+        
+        %bgColor {
+            content: "";
             position: absolute;
-            bottom: 50px;
-            right: 100px;
+            background-color: $bgColorHeading;
+            z-index: -1;
         }
-    }
-    &_card {
-        display: flex;
-        flex-direction: row;
-        width: 70%;
-        align-items: center;
-        background-color: $darkColor;
-        padding: 10px;
-        margin: 20px;
-        height: 220px;
-        &_wrap {
-            margin-left: 350px;
-        }
-        &_img {
-            height: 200px;
-        }
-        &_text {
-            font-size: 12px;
-            padding-bottom: 20px;
-            color: $colorSilver;
-            text-align: justify;
-            width: 350px;
-        }
-        &_heading {
-            font-size: 20px;
-            font-family: 'Source Sans Pro', sans-serif;
-            text-align: center;
-            padding: 30px 0 30px 0;
-        }
-        &_right_container {
-            color: $colorWhite;
-            padding-left: 70px;
-            padding-right: 40px;
-            opacity: 0.9;
-            .section_link {
-                color: $colorSilver;
-                font-size: 12px;
-                padding-left: 150px;
-            }
-        }
-    }
-}
-
-.footer {
-    background-color: $darkColor;
-    height: 180px;
-    &-wrap {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        padding-top: 80px;
-        align-items: center;
-        font-size: 12px;
-        color: $colorSilver;
-    }
-    &_logo {
-        display: flex;
-        p {
+        
+        %flexCol {
             display: flex;
             flex-direction: column;
             text-align: center;
-            line-height: 20px;
             font-size: 20px;
-            padding: 5px 0 0 10px;
         }
-    }
-    &_text {
-        width: 230px;
-    }
-    .footer-cr {
-        font-size: 12px;
-    }
-    span {
-        font-size: 8px;
-    }
-}
+        
+        %flexRow {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: inherit;
+        }
+        
+        body {
+            box-sizing: border-box;
+            width: 1500px;
+            font-family: 'Hind', sans-serif;
+            color: $colorSection;
+            background-color: $primary;
+        }
+        
+        .header {
+            height: 70vh;
+            background-image: $bgImage;
+            background-size: cover;
+            background-position: center;
+            border-bottom-right-radius: 40%;
+            position: relative;
+            &-wrap {
+                margin-left: 170px;
+                .landing-logo {
+                    @extend %flexRow;
+                    padding-top: 30px;
+                    line-height: 15px;
+                    p {
+                        @extend %flexCol;
+                        padding-left: 10px;
+                        font-weight: bold;
+                        padding-top: 6px;
+                        color: $secondary;
+                    }
+                    span {
+                        font-size: 8px;
+                    }
+                }
+            }
+            &_heading {
+                font-weight: bold;
+                font-size: 60px;
+                padding-top: 30px;
+                width: 430px;
+                position: relative;
+                font-family: 'Source Sans Pro', sans-serif;
+                line-height: 60px;
+                color: $secondary;
+                &:before {
+                    @extend %bgColor;
+                    width: 250px;
+                    height: 40px;
+                    top: 130px;
+                }
+            }
+            &_text {
+                padding-top: 30px;
+                margin-bottom: 40px;
+                text-align: justify;
+                font-size: 13px;
+                width: 500px;
+                color: $headerText;
+            }
+            &_button {
+                @include button;
+            }
+            .login {
+                @include link($primary, 120px);
+            }
+        }
+        
+        .section {
+            padding: 25px 0 150px 0;
+            &_text {
+                text-align: center;
+                font-size: 35px;
+                font-family: 'Source Sans Pro', sans-serif;
+                position: relative;
+                &:before {
+                    content: "";
+                    background-color: $bgColoSection;
+                    width: 150px;
+                    height: 36px;
+                    z-index: -1;
+                    position: absolute;
+                    left: 760px;
+                }
+            }
+            &_banner {
+                background: $bgBanner;
+                width: 900px;
+                height: 130px;
+                border-radius: 5px;
+                position: absolute;
+                left: 320px;
+                z-index: 2;
+                margin-top: 85px;
+                &_heading {
+                    font-weight: bold;
+                    font-size: 28px;
+                    position: relative;
+                    color: $secondary;
+                    &:before {
+                        @extend %bgColor;
+                        width: 57px;
+                        height: 43px;
+                        left: 115px;
+                        bottom: 2px;
+                    }
+                }
+                &_text {
+                    font-size: 14px;
+                    padding-top: 10px;
+                    color: $colorSilver;
+                    &_wrap {
+                        margin: 25px 0 0 100px;
+                        line-height: 30px;
+                        position: relative;
+                    }
+                }
+                &_button {
+                    position: absolute;
+                    bottom: 50px;
+                    right: 100px;
+                    @include button;
+                }
+            }
+            &_card {
+                @extend %flexRow;
+                width: 70%;
+                align-items: center;
+                background-color: $bgColorCardFoot;
+                padding: 10px;
+                margin: 20px;
+                height: 220px;
+                &_wrap {
+                    margin-left: 350px;
+                }
+                &_img {
+                    height: 200px;
+                }
+                &_text {
+                    font-size: 12px;
+                    padding-bottom: 20px;
+                    color: $colorSilver;
+                    text-align: justify;
+                    width: 350px;
+                }
+                &_heading {
+                    font-size: 20px;
+                    font-family: 'Source Sans Pro', sans-serif;
+                    text-align: center;
+                    padding: 30px 0 30px 0;
+                }
+                &_right_container {
+                    color: $primary;
+                    padding: 0 70px 0 70px;
+                    opacity: 0.9;
+                    font-size: 12px;
+                    .section_link {
+                        @include link($colorSilver, 150px);
+                    }
+                }
+            }
+        }
+        
+        .footer {
+            background-color: $bgColorCardFoot;
+            height: 180px;
+            &-wrap {
+                @extend %flexRow;
+                justify-content: space-around;
+                padding-top: 80px;
+                align-items: center;
+                font-size: 11px;
+                color: $colorSilver;
+            }
+            &_logo {
+                display: flex;
+                p {
+                    @extend %flexCol;
+                    line-height: 20px;
+                    padding: 5px 0 0 10px;
+                }
+            }
+            &_text {
+                width: 230px;
+            }
+            .footer-cr {
+                font-size: 12px;
+            }
+            span {
+                font-size: 8px;
+            }
+        }
