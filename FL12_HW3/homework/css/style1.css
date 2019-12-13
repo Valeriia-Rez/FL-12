@@ -33,8 +33,7 @@ body {
   background-image: linear-gradient(to right bottom, rgba(180, 199, 176, 0.1), rgba(83, 90, 88, 0.1)), url(../img/m-h-day.jpg);
   background-size: cover;
   background-position: center;
-  border-bottom-right-radius: 40%;
-  position: relative; }
+  border-bottom-right-radius: 40%; }
   .header-wrap {
     margin-left: 170px; }
     .header-wrap .landing-logo {
@@ -62,7 +61,7 @@ body {
       top: 130px; }
   .header_text {
     padding-top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 45px;
     text-align: justify;
     font-size: 13px;
     width: 500px;
