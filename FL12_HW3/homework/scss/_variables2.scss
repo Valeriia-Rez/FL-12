@@ -4,13 +4,12 @@ $secondary:$white;
 $colorSection:$secondary;
 $headerText:#E7E2E2;
 $colorSilver:#D3CED1;
-$bgColorHeading: #FF4500;
-$bgColoSection: #EE4E3A;
-$bgColorCardFoot: #3C3F50;
-$bgColorButton:#D5BF0D;
+$bgColorWord: #FF4500;
+$bgColorCardFooter: #3C3F50;
+$bgColorBanner:#D5BF0D;
 $bgImage:linear-gradient(to right bottom, rgba(68, 62, 62, 0.1), rgba(61, 26, 33, 0.1)),
 url(../img/m-h-night.jpg);
-$bgBanner:linear-gradient(to right, #DB9D0A, #993A49);
+$bannerGradient:linear-gradient(to right, $bgColorBanner, #993A49);
 $fontFamilyPrimary:'Source Sans Pro',
 sans-serif;
 $fontFamilySecondary:'Fresca',

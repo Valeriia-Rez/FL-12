@@ -1,4 +1,3 @@
-/*@import"variables2";*/
 .header_heading:before, .section_banner_heading:before {
   content: "";
   position: absolute;
@@ -47,8 +46,8 @@ body {
         font-weight: bold;
         padding-top: 6px;
         color: #20272E; }
-      .header-wrap .landing-logo span {
-        font-size: 8px; }
+        .header-wrap .landing-logo p span {
+          font-size: 8px; }
   .header_heading {
     font-weight: bold;
     font-size: 60px;
@@ -83,7 +82,7 @@ body {
     padding-left: 120px; }
 
 .section {
-  padding: 25px 0 150px 0; }
+  padding: 25px 0 150px; }
   .section_text {
     text-align: center;
     font-size: 35px;
@@ -91,14 +90,14 @@ body {
     position: relative; }
     .section_text:before {
       content: "";
-      background-color: #1A9BBD;
+      background-color: #00BFFF;
       width: 150px;
       height: 36px;
       z-index: -1;
       position: absolute;
       left: 770px; }
   .section_banner {
-    background: linear-gradient(to right, #659412, #3261CB);
+    background: linear-gradient(to right, #739D07, #3261CB);
     font-family: "Source Sans Pro", sans-serif;
     width: 950px;
     height: 110px;
@@ -136,14 +135,15 @@ body {
       height: 40px;
       border-radius: 2px; }
   .section_card {
-    width: 900px;
     align-items: center;
     background-color: #21232F;
     padding: 10px;
     margin: 25px;
     height: 240px; }
     .section_card_wrap {
-      margin-left: 300px; }
+      max-width: 900px;
+      min-width: 270px;
+      margin: 0 auto; }
     .section_card_img {
       height: 200px;
       width: 350px; }
@@ -185,11 +185,11 @@ body {
     .footer_logo p {
       line-height: 15px;
       padding: 5px 0 0 10px; }
+      .footer_logo p span {
+        font-size: 8px; }
   .footer_text {
     width: 230px; }
   .footer .footer-cr {
     font-size: 12px; }
-  .footer span {
-    font-size: 8px; }
 
 /*# sourceMappingURL=style1.css.map */

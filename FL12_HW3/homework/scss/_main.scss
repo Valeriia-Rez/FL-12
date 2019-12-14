@@ -1,8 +1,5 @@
-        @import"variables1";
-        /*@import"variables2";*/
-        
         @mixin button {
-            background-color: $bgColorButton;
+            background-color: $bgColorBanner;
             border: none;
             color: $white;
             width: 110px;
@@ -15,10 +12,10 @@
             padding-left: $padding;
         }
         
-        %bgColor {
+        %wordBgColor {
             content: "";
             position: absolute;
-            background-color: $bgColorHeading;
+            background-color: $bgColorWord;
             z-index: -1;
         }
         
@@ -32,6 +29,11 @@
         %flexRow {
             display: flex;
             flex-direction: row;
+        }
+        
+        @function calcMinWidthFromPercent($mainMinWidth, $reqiredPercent) {
+            $result: ($mainMinWidth * $reqiredPercent) / 100;
+            @return $result;
         }
         
         *,
@@ -71,9 +73,9 @@
                         font-weight: bold;
                         padding-top: 6px;
                         color: $secondary;
-                    }
-                    span {
-                        font-size: 8px;
+                        span {
+                            font-size: 8px;
+                        }
                     }
                 }
             }
@@ -88,7 +90,7 @@
                 color: $secondary;
                 opacity: 0.9;
                 &:before {
-                    @extend %bgColor;
+                    @extend %wordBgColor;
                     width: 250px;
                     height: 40px;
                     top: 130px;
@@ -112,7 +114,7 @@
         }
         
         .section {
-            padding: 25px 0 150px 0;
+            padding: 25px 0 150px;
             &_text {
                 text-align: center;
                 font-size: 35px;
@@ -120,7 +122,7 @@
                 position: relative;
                 &:before {
                     content: "";
-                    background-color: $bgColoSection;
+                    background-color: $bgColorWord;
                     width: 150px;
                     height: 36px;
                     z-index: -1;
@@ -129,7 +131,7 @@
                 }
             }
             &_banner {
-                background: $bgBanner;
+                background: $bannerGradient;
                 font-family: $fontFamilyPrimary;
                 width: 950px;
                 height: 110px;
@@ -144,7 +146,7 @@
                     position: relative;
                     color: $secondary;
                     &:before {
-                        @extend %bgColor;
+                        @extend %wordBgColor;
                         width: 57px;
                         height: 43px;
                         left: 115px;
@@ -170,14 +172,15 @@
             }
             &_card {
                 @extend %flexRow;
-                width: 900px;
                 align-items: center;
-                background-color: $bgColorCardFoot;
+                background-color: $bgColorCardFooter;
                 padding: 10px;
                 margin: 25px;
                 height: 240px;
                 &_wrap {
-                    margin-left: 300px;
+                    max-width: 900px;
+                    min-width: calcMinWidthFromPercent(900, 30) + px;
+                    margin: 0 auto;
                 }
                 &_img {
                     height: 200px;
@@ -209,7 +212,7 @@
         }
         
         .footer {
-            background-color: $bgColorCardFoot;
+            background-color: $bgColorCardFooter;
             height: 180px;
             &-wrap {
                 @extend %flexRow;
@@ -230,6 +233,9 @@
                     @extend %flexCol;
                     line-height: 15px;
                     padding: 5px 0 0 10px;
+                    span {
+                        font-size: 8px;
+                    }
                 }
             }
             &_text {
@@ -237,8 +243,5 @@
             }
             .footer-cr {
                 font-size: 12px;
-            }
-            span {
-                font-size: 8px;
             }
         }
