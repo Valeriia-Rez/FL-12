@@ -63,7 +63,8 @@ hr {
 .blog_date,
 .blog_comment,
 .blog_text,
-.blog_btn {
+.blog_btn,
+.footer_info {
     font-size: 14px;
 }
 
@@ -197,9 +198,9 @@ hr {
 .footer_box {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     width: 750px;
     margin: 0 auto;
-    align-items: flex-start;
 }
 
 .footer_content {
@@ -207,7 +208,6 @@ hr {
 }
 
 .footer_info {
-    font-size: 14px;
     margin-top: 12px;
 }
 
