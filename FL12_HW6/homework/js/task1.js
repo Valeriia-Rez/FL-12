@@ -1,33 +1,39 @@
-let D, x, x1, x2, a, b, c;
+let discriminant, x, x1, x2, a, b, c;
+const sides = 4;
+const quadrat = 2;
 
-if (confirm("ax2 + bx + c = 0")) {
-    a = parseInt(prompt("a ="));
-    if (a == 0 || isNaN(a)) {
+if (confirm("Solve Quadratic equation. Example: ax2 + bx + c = 0")) {
+    a = parseFloat(prompt("Enter number for a ="));
+    if (a === 0 || isNaN(a)) {
         alert("Invalid input data");
-    }
+        console.log("Invalid input data");
+    } else {
+        b = parseFloat(prompt("Enter number for b ="));
+        if (isNaN(b)) {
+            alert("Invalid input data");
+            console.log("Invalid input data");
+        } else {
+            c = parseFloat(prompt("Enter number for c ="));
+            if (isNaN(c)) {
+                alert("Invalid input data");
+                console.log("Invalid input data");
+            } else {
+                alert(a + "x2" + "+" + b + "x" + "+" + c + "=" + 0);
+                discriminant = b * b - sides * a * c;
+                alert("discriminant =" + discriminant);
 
-    b = parseInt(prompt("b ="));
-    if (isNaN(b)) {
-        alert("Invalid input data");
-    }
+                if (discriminant > 0) {
+                    x1 = Math.round((-b + Math.sqrt(discriminant)) / (quadrat * a));
+                    x2 = Math.round((-b - Math.sqrt(discriminant)) / (quadrat * a));
+                    console.log("x1 = " + x1 + ", x2 = " + x2);
+                } else if (discriminant === 0) {
+                    x = Math.round(-b / (quadrat * a));
 
-    c = parseInt(prompt("c ="));
-    if (isNaN(c)) {
-        alert("Invalid input data");
-    }
-    alert(a + "x2" + "+" + b + "x" + "+" + c + "=" + 0);
-
-    D = b * b - 4 * a * c;
-    alert("D =" + D);
-    if (D > 0) {
-        x1 = Math.round((-b + Math.sqrt(D)) / (2 * a));
-        x2 = Math.round((-b - Math.sqrt(D)) / (2 * a));
-        console.log("x1 = " + x1 + ", x2 = " + x2);
-    } else if (D == 0) {
-        x = Math.round(-b / (2 * a));
-
-        console.log(" x = " + x);
-    } else if (D < 0) {
-        console.log("Решения нет,так как дискриминант меньше ноля");
+                    console.log(" x = " + x);
+                } else {
+                    console.log("no solution,discriminant < 0");
+                }
+            }
+        }
     }
 }
