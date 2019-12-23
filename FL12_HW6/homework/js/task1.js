@@ -1,12 +1,20 @@
 let D, x, x1, x2, a, b, c;
 
 if (confirm("ax2 + bx + c = 0")) {
-    a = prompt("a =");
-    if (a == 0) {
-        console.log("Invalid input data");
+    a = parseInt(prompt("a ="));
+    if (a == 0 || isNaN(a)) {
+        alert("Invalid input data");
     }
-    b = prompt("b =");
-    c = prompt("c =");
+
+    b = parseInt(prompt("b ="));
+    if (isNaN(b)) {
+        alert("Invalid input data");
+    }
+
+    c = parseInt(prompt("c ="));
+    if (isNaN(c)) {
+        alert("Invalid input data");
+    }
     alert(a + "x2" + "+" + b + "x" + "+" + c + "=" + 0);
 
     D = b * b - 4 * a * c;
