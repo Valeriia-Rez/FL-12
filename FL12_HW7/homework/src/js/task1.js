@@ -1,50 +1,51 @@
-let promptMessagePassword, promptMessageEmail,
-    confirmMessage, promptMessageOldPassword,
-    promptMessageNewPassword,
-    promptMessageNewAgainPassword;
-let userEmail = 'user@gmail.com';
-let adminEmail = 'admin@gmail.com';
-let userPassword = 'UserPass';
-let adminPassword = 'AdminPass';
-let alertCancel = 'Canceled';
-let alertCorrect = 'Correct password';
-let alertWrong = 'Wrong password';
-const five = 5;
-const six = 6;
+let userPassword, userEmail,
+    isConfirmChangePassword, userOldPassword,
+    userNewPassword,
+    userConfirmNewPassword;
+const userRegisteredEmail = 'user@gmail.com';
+const adminRegisteredEmail = 'admin@gmail.com';
+const userRegisteredPassword = 'UserPass';
+const adminRegisteredPassword = 'AdminPass';
+const alertCancel = 'Canceled';
+const alertWrong = 'Wrong password';
+const minEmailLength = 5;
+const minPasswordLength = 6;
 
-promptMessageEmail = prompt('Enter your email');
-if (promptMessageEmail === '' || promptMessageEmail === null) {
+userEmail = prompt('Enter your email');
+userEmail = userEmail && userEmail.toLowerCase() || userEmail;
+
+if (!userEmail) {
     alert(alertCancel);
-} else if (promptMessageEmail.length < five) {
+} else if (userEmail.length < minEmailLength) {
     alert('I don`t know any emails having name length less than 5 symbols');
-} else if (promptMessageEmail === userEmail || promptMessageEmail === adminEmail) {
-    promptMessagePassword = prompt('Enter your password');
-    if (promptMessagePassword === '' || promptMessagePassword === null) {
+
+} else if (userEmail === userRegisteredEmail || userEmail === adminRegisteredEmail) {
+    userPassword = prompt('Enter your password');
+    if (!userPassword) {
         alert(alertCancel);
-    } else if (promptMessageEmail === userEmail &&
-        promptMessagePassword === userPassword ||
-        promptMessageEmail === adminEmail &&
-        promptMessagePassword === adminPassword) {
-        alert(alertCorrect);
-        confirmMessage = confirm('Do you want to change your password?');
-        if (confirmMessage) {
-            promptMessageOldPassword = prompt('Enter your old password');
-            if (promptMessageOldPassword === '' ||
-                promptMessageOldPassword === null) {
+    } else if (userEmail === userRegisteredEmail &&
+        userPassword === userRegisteredPassword ||
+        userEmail === adminRegisteredEmail &&
+        userPassword === adminRegisteredPassword) {
+
+        isConfirmChangePassword = confirm('Do you want to change your password?');
+        if (isConfirmChangePassword) {
+            userOldPassword = prompt('Enter your old password');
+            if (!userOldPassword) {
                 alert(alertCancel);
-            } else if (promptMessageEmail === userEmail &&
-                promptMessageOldPassword === userPassword ||
-                promptMessageEmail === adminEmail &&
-                promptMessageOldPassword === adminPassword) {
-                alert(alertCorrect);
-                promptMessageNewPassword = prompt('Enter new password');
-                if (promptMessageNewPassword === '' || promptMessageNewPassword === null) {
+            } else if (userEmail === userRegisteredEmail &&
+                userOldPassword === userRegisteredPassword ||
+                userEmail === adminRegisteredEmail &&
+                userOldPassword === adminRegisteredPassword) {
+
+                userNewPassword = prompt('Enter new password');
+                if (!userNewPassword) {
                     alert(alertCancel);
-                } else if (promptMessageNewPassword.length < six) {
+                } else if (userNewPassword.length < minPasswordLength) {
                     alert('It’s too short password. Sorry.');
-                } else if (promptMessageNewPassword) {
-                    promptMessageNewAgainPassword = prompt('Enter new password again');
-                    if (promptMessageNewAgainPassword === promptMessageNewPassword) {
+                } else if (userNewPassword) {
+                    userConfirmNewPassword = prompt('Enter new password again');
+                    if (userConfirmNewPassword === userNewPassword) {
                         alert('You have successfully changed your password');
                     } else {
                         alert('You wrote the wrong password.');
@@ -59,6 +60,6 @@ if (promptMessageEmail === '' || promptMessageEmail === null) {
     } else {
         alert(alertWrong);
     }
-} else if (promptMessageEmail !== userEmail || promptMessageEmail !== adminEmail) {
+} else {
     alert('I don’t know you');
 }

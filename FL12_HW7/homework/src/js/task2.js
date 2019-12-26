@@ -1,62 +1,57 @@
-let isRestartGame = false;
-let playGame = true;
-let confirmMessage = confirm("Do you want to play a game?");
-let totalPrize = 0;
-let maxPrize = 100;
-let initialRange = 8;
-let winningNum = Math.floor(Math.random() * initialRange + 1);
+let winningNum, totalPrize, maxPrize, initialRange;
+let isRestartGame = true;
+const two = 2;
+const four = 4;
+const maxAttempt = 3;
+let confirmMessage = confirm('Do you want to play a game?');
 
-while (playGame) {
+while (confirmMessage) {
     if (isRestartGame) {
         totalPrize = 0;
         maxPrize = 100;
         initialRange = 8;
         winningNum = Math.floor(Math.random() * initialRange + 1);
     }
-    const maxAttempt = 3;
-    let isWin = false;
+
     console.log(winningNum);
-    if (confirmMessage) {
-        for (let i = 1; i <= maxAttempt; i++) {
-            let guessPrompt = prompt(`
+
+    for (let i = 1; i <= maxAttempt; i++) {
+        let guess = prompt(`
         Choose a roulette pocket number from 0 to ${initialRange}.
         Attempts left: ${maxAttempt - i + 1}.
         Total prize: ${totalPrize}$.
         Possible prize on current attempt: ${maxPrize}$.`);
-            guessPrompt = parseInt(guessPrompt);
+        guess = parseInt(guess);
 
-            if (winningNum === guessPrompt) {
-                isWin = true;
-                totalPrize = totalPrize + maxPrize;
-                let continueGame = confirm(
-                    `Congratulation, you won!!Your prize is: ${maxPrize}$!Do you want to continue?`
-                );
-                if (continueGame) {
-                    maxPrize = maxPrize * 2;
-                    initialRange = initialRange + 4;
-                    winningNum = Math.floor(Math.random() * initialRange + 1);
-                } else {
-                    alert(
-                        `Thank you for your participation. Your prize is: ${totalPrize}$`
-                    );
-                    confirmMessage = confirm("Do you want play again?");
-                    isRestartGame = true;
-                }
-
-                break;
-            } else if (i === maxAttempt && !isWin) {
+        if (winningNum === guess) {
+            totalPrize = totalPrize + maxPrize;
+            let continueGame = confirm(
+                `Congratulation, you won!!Your prize is: ${maxPrize}$!Do you want to continue?`
+            );
+            if (continueGame) {
+                maxPrize = maxPrize * two;
+                initialRange = initialRange + four;
+                winningNum = Math.floor(Math.random() * initialRange + 1);
+                isRestartGame = false;
+            } else {
                 alert(
                     `Thank you for your participation. Your prize is: ${totalPrize}$`
                 );
-
-                confirmMessage = confirm("Do you want play again?");
+                confirmMessage = confirm('Do you want play again?');
                 isRestartGame = true;
-                break;
             }
-            maxPrize = maxPrize / 2;
+
+
+            break;
+        } else if (i === maxAttempt) {
+            alert(`Thank you for your participation. Your prize is: ${totalPrize}$`);
+
+            confirmMessage = confirm('Do you want play again?');
+            isRestartGame = true;
+            break;
+        } else {
+            maxPrize = maxPrize / two;
         }
-    } else {
-        alert("You did not become a billionaire, but can.");
-        break;
     }
 }
+alert('You did not become a billionaire, but can.');
