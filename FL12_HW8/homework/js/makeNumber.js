@@ -1,17 +1,15 @@
-let string = "erer384jjjfd123";
-let newArr = [];
+function makeNumber(str) {
+    let newArr = [];
+    let arrayFromString = str.split("");
+    for (let i = 0; i < arrayFromString.length; i++) {
 
-function makeNumber(array) {
-    string = string.split();
-    console.log(string);
-    for (let i = 0; i < array.length; i++) {
-
-        if (!isNaN(array[i])) {
-            newArr.push(array[i]);
+        if (!isNaN(arrayFromString[i])) {
+            newArr.push(arrayFromString[i]);
         }
     }
 
     return newArr.join("");
 }
-let num = makeNumber(string);
-console.log(num);
+makeNumber("erer384jjjfd123");
+makeNumber("123098h76gfdd");
+makeNumber("ijifjgdj");

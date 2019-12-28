@@ -1,11 +1,12 @@
-let array = [2, 4, 5, -2, 6];
-let min = getMinValue(array);
+let arrayOfNumbers = [2, 4, 5, -2, 6];
 
-function getMinValue(array) {
-    let min = array[0];
-    for (var i = 0; i < array.length; i++) {
-        if (min > array[i]) min = array[i];
+function getMinValue(arrayOfNumbers) {
+    let min = arrayOfNumbers[0];
+    for (var i = 0; i < arrayOfNumbers.length; i++) {
+        if (min > arrayOfNumbers[i]) {
+            min = arrayOfNumbers[i];
+        }
     }
     return min;
 }
-console.log(min);
+getMinValue(arrayOfNumbers);

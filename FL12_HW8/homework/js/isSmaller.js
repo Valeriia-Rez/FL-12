@@ -1,4 +1,10 @@
-function isSmaller(small, big) {
-    return small < big;
+function isBigger(numberOne, numberTwo) {
+    return numberOne > numberTwo;
 }
-isSmaller(5, 1);
+
+
+function isSmaller(numberOne, numberTwo) {
+
+    return !isBigger(numberOne, numberTwo);
+}
+isSmaller(5, -1);
