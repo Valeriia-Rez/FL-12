@@ -13,8 +13,6 @@ while (confirmMessage) {
         winningNum = Math.floor(Math.random() * initialRange + 1);
     }
 
-    console.log(winningNum);
-
     for (let i = 1; i <= maxAttempt; i++) {
         let guess = prompt(`
         Choose a roulette pocket number from 0 to ${initialRange}.
