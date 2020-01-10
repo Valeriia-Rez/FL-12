@@ -1,4 +1,4 @@
-let arr = ["1", 2, 3, "4"];
+/*let arr = ["1", 2, 3, "4"];
 
 function convert(arg) {
     let newArr = [];
@@ -12,12 +12,27 @@ function convert(arg) {
     }
     return newArr;
 }
-convert(arr);
+convert(arr);*/
 
 
 
-
-/*function flipOver(str) {
-    return str.split("").reverse().join("");
+function executeforEach(el, callBackFun) {
+    for (let i = 0; i < el.length; i++) {
+        callBackFun(el[i]);
+    }
 }
-console.log(flipOver("hey world"));*/
+console.log(executeforEach([1, 2, 3], function(el) {
+    console.log(el * 2);
+}));
+
+function mapArray(el, callBackFun) {
+    let arr = [];
+    for (let i = 0; i < el.length; i++) {
+        arr.push(executeforEach([parseInt(el[i])], callBackFun));
+    }
+    return arr;
+}
+
+console.log(mapArray([2, "5", 8], function(el) {
+    return el + 3;
+}));
