@@ -55,3 +55,33 @@ function makeListFromRange(arr) {
     return newArr;
 }
 console.log(makeListFromRange([2, 7]));
+
+const date = new Date(2019, 0, 2);
+
+function getPastDay(date, days) {
+    let dateCopy = new Date(date);
+    dateCopy.setDate(date.getDate() - days);
+    return dateCopy.getDate();
+}
+
+console.log(getPastDay(date, 1)); // 1, (1 Jan 2019)
+console.log(getPastDay(date, 2)); // 31, (31 Dec 2018)
+console.log(getPastDay(date, 365)); // 2, (2 Jan 2018)
+
+function formatDate(date) {
+    let curr_year = date.getFullYear();
+    let curr_month = date.getMonth() + 1;
+    let curr_date = date.getDate();
+    let curr_hours = date.getHours();
+    let curr_minutes = date.getMinutes();
+    if (curr_hours < 10) {
+        curr_hours = `0${curr_hours}`;
+    }
+    if (curr_minutes < 10) {
+        curr_minutes = `0${curr_minutes}`;
+    }
+    return `${curr_year}/${curr_month}/${curr_date} ${curr_hours}:${curr_minutes}`;
+}
+
+console.log(formatDate(new Date('6/15/2018 09:15:00'))); //"2018/6/15 09:15"
+console.log(formatDate(new Date())); // "2020/1/7 12:56" // gets current local time
