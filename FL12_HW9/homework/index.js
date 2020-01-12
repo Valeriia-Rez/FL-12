@@ -18,6 +18,7 @@ function executeforEach(el, callBackFun) {
     for (let i = 0; i < el.length; i++) {
         callBackFun(el[i]);
     }
+
 }
 console.log(executeforEach([1, 2, 3], function(el) {
     console.log(el * 2);
@@ -27,7 +28,6 @@ function mapArray(el, callBackFun) {
     let arr = [];
     for (let i = 0; i < el.length; i++) {
         arr.push(parseInt(el[i]));
-
     }
     return arr;
     executeforEach(arr, callBackFun);
@@ -35,6 +35,17 @@ function mapArray(el, callBackFun) {
 console.log(mapArray([2, "5", 8], function(el) {
     return el + 3;
 }));
+
+
+function filterArray(el, callBackFun) {
+    executeforEach(el, callBackFun);
+}
+
+console.log(filterArray([2, 5, 8], function(el) {
+    return el % 2 === 0;
+}));
+
+
 
 function flipOver(str) {
     let newStr = "";
@@ -84,4 +95,4 @@ function formatDate(date) {
 }
 
 console.log(formatDate(new Date('6/15/2018 09:15:00'))); //"2018/6/15 09:15"
-console.log(formatDate(new Date())); // "2020/1/7 12:56" // gets current local time
+console.log(formatDate(new Date())); // "2020/1/7 12:56" // gets current local time4fr4
