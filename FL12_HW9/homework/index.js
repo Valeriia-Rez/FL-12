@@ -9,9 +9,7 @@ const fifty = 50;
 const year = 2019;
 const days = 365;
 
-
-
-const arr = [`${one}`, two, three, `${seven}`];
+const arr = ['1', two, three, '7'];
 
 function convert(el) {
     let newArr = [];
@@ -25,7 +23,7 @@ function convert(el) {
     }
     return newArr;
 }
-console.log(convert(arr));
+convert(arr);
 
 function executeforEach(el, callBackFun) {
 
@@ -42,9 +40,9 @@ function mapArray(el, callBackFun) {
     return [...el];
 }
 
-console.log(mapArray([one, `${two}`, three], function(el) {
+mapArray([one, '2', three], function(el) {
     return parseInt(el) + three;
-}));
+});
 
 
 function filterArray(el, callBackFun) {
@@ -58,9 +56,9 @@ function filterArray(el, callBackFun) {
     }
     return filteredArray;
 }
-console.log(filterArray([one, two, three, ten], function(el) {
+filterArray([one, two, three, ten], function(el) {
     return el % two === 0;
-}));
+});
 
 
 
@@ -71,7 +69,7 @@ function flipOver(str) {
     }
     return newStr;
 }
-console.log(flipOver('hey world'));
+flipOver('hey world');
 
 
 
@@ -82,18 +80,20 @@ function makeListFromRange(arr) {
     }
     return newArr;
 }
-console.log(makeListFromRange([two, seven]));
+makeListFromRange([two, seven]);
 
 
+const actors = [
+    { name: 'tommy', age: 36 },
+    { name: 'lee', age: 28 }
+];
 
-/*function getArrayOfKeys(actors, key) {
-    const actors = [
-        { name: "tommy", age: 36 },
-        { name: "lee", age: 28 }
-    ];
-    executeforEach(el, callBackFun);
+function getArrayOfKeys(el, key) {
+    let copyElements = [...el];
+    executeforEach(copyElements, (el) => el[key]);
+    return copyElements;
 }
-getArrayOfKeys(actors, "name");*/
+getArrayOfKeys(actors, 'name');
 
 function substitute(el) {
     let originalArray = [...el];
@@ -108,7 +108,7 @@ function substitute(el) {
     }
     return arr;
 }
-console.log(substitute([fifty, two, forty, three]));
+substitute([fifty, two, forty, three]);
 
 
 
@@ -120,9 +120,9 @@ function getPastDay(date, days) {
     return dateCopy.getDate();
 }
 
-console.log(getPastDay(date, one));
-console.log(getPastDay(date, two));
-console.log(getPastDay(date, days));
+getPastDay(date, one);
+getPastDay(date, two);
+getPastDay(date, days);
 
 function formatDate(date) {
     let curr_year = date.getFullYear();
@@ -139,5 +139,5 @@ function formatDate(date) {
     return `${curr_year}/${curr_month}/${curr_date} ${curr_hours}:${curr_minutes}`;
 }
 
-console.log(formatDate(new Date('6/15/2018 09:15:00')));
-console.log(formatDate(new Date()));
+formatDate(new Date('6/15/2018 09:15:00'));
+formatDate(new Date());
