@@ -1,9 +1,20 @@
-let arr = ["1", 2, 3, "4"];
+let one = 1;
+let two = 2;
+let three = 3;
+let four = 4;
+let five = 5;
+let seven = 7;
+let eight = 8;
+let ten = 10;
+let year = 2019;
+let days = 365;
+
+let arr = [`${one}`, two, three, `${four}`];
 
 function convert(arg) {
     let newArr = [];
     for (let i = 0; i < arg.length; i++) {
-        if (typeof arg[i] === "string") {
+        if (typeof arg[i] === 'string') {
 
             newArr.push(parseInt(arg[i]));
         } else {
@@ -20,8 +31,8 @@ function executeforEach(el, callBackFun) {
         el[i] = callBackFun(el[i]);
     }
 }
-executeforEach([1, 2, 3], function(el) {
-    console.log(el * 2);
+executeforEach([one, two, three], function(el) {
+    console.log(el * two);
 });
 
 function mapArray(el, callBackFun) {
@@ -29,44 +40,61 @@ function mapArray(el, callBackFun) {
     return [...el];
 }
 
-console.log(mapArray([2, "5", 8], function(el) {
-    return parseInt(el) + 3;
+console.log(mapArray([two, `${five}`, eight], function(el) {
+    return parseInt(el) + three;
 }));
 
 
 function filterArray(el, callBackFun) {
-
+    let originalArrayElements = [...el];
+    let filteredArray = [];
     executeforEach(el, callBackFun);
-    return [...el];
+    for (let i = 0; i < el.length; i++) {
+        if (el[i]) {
+            filteredArray = [...filteredArray, originalArrayElements[i]];
+        }
+    }
+    return filteredArray;
 }
-
-console.log(filterArray([2, 5, 8], function(el) {
-    return el % 2 === 0;
+console.log(filterArray([two, five, eight], function(el) {
+    return el % two === 0;
 }));
 
 
 
 function flipOver(str) {
-    let newStr = "";
-    for (let i = str.length - 1; i >= 0; i--) {
+    let newStr = '';
+    for (let i = str.length - one; i >= 0; i--) {
         newStr = newStr + str[i];
     }
     return newStr;
 }
-console.log(flipOver("hey world"));
+console.log(flipOver('hey world'));
 
 
 
 function makeListFromRange(arr) {
     let newArr = [];
-    for (let i = arr[0]; i <= arr[1]; i++) {
+    for (let i = arr[0]; i <= arr[one]; i++) {
         newArr.push(i);
     }
     return newArr;
 }
-console.log(makeListFromRange([2, 7]));
+console.log(makeListFromRange([two, seven]));
 
-const date = new Date(2019, 0, 2);
+
+
+/*function getArrayOfKeys() {
+    const actors = [
+        { name: "tommy", age: 36 },
+        { name: "lee", age: 28 }
+    ];
+
+}
+getArrayOfKeys(actors, "name");*/
+
+
+const date = new Date(year, 0, two);
 
 function getPastDay(date, days) {
     let dateCopy = new Date(date);
@@ -74,24 +102,24 @@ function getPastDay(date, days) {
     return dateCopy.getDate();
 }
 
-console.log(getPastDay(date, 1)); // 1, (1 Jan 2019)
-console.log(getPastDay(date, 2)); // 31, (31 Dec 2018)
-console.log(getPastDay(date, 365)); // 2, (2 Jan 2018)
+console.log(getPastDay(date, one));
+console.log(getPastDay(date, two));
+console.log(getPastDay(date, days));
 
 function formatDate(date) {
     let curr_year = date.getFullYear();
-    let curr_month = date.getMonth() + 1;
+    let curr_month = date.getMonth() + one;
     let curr_date = date.getDate();
     let curr_hours = date.getHours();
     let curr_minutes = date.getMinutes();
-    if (curr_hours < 10) {
+    if (curr_hours < ten) {
         curr_hours = `0${curr_hours}`;
     }
-    if (curr_minutes < 10) {
+    if (curr_minutes < ten) {
         curr_minutes = `0${curr_minutes}`;
     }
     return `${curr_year}/${curr_month}/${curr_date} ${curr_hours}:${curr_minutes}`;
 }
 
-console.log(formatDate(new Date('6/15/2018 09:15:00'))); //"2018/6/15 09:15"
-console.log(formatDate(new Date())); // "2020/1/7 12:56" // gets current local time4fr4
+console.log(formatDate(new Date('6/15/2018 09:15:00')));
+console.log(formatDate(new Date()));
