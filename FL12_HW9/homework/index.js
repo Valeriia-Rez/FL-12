@@ -1,24 +1,26 @@
-let one = 1;
-let two = 2;
-let three = 3;
-let four = 4;
-let five = 5;
-let seven = 7;
-let eight = 8;
-let ten = 10;
-let year = 2019;
-let days = 365;
+const one = 1;
+const two = 2;
+const three = 3;
+const seven = 7;
+const ten = 10;
+const thirty = 30;
+const forty = 40;
+const fifty = 50;
+const year = 2019;
+const days = 365;
 
-let arr = [`${one}`, two, three, `${four}`];
 
-function convert(arg) {
+
+const arr = [`${one}`, two, three, `${seven}`];
+
+function convert(el) {
     let newArr = [];
-    for (let i = 0; i < arg.length; i++) {
-        if (typeof arg[i] === 'string') {
+    for (let i = 0; i < el.length; i++) {
+        if (typeof el[i] === 'string') {
 
-            newArr.push(parseInt(arg[i]));
+            newArr.push(parseInt(el[i]));
         } else {
-            newArr.push(String(arg[i]));
+            newArr.push(String(el[i]));
         }
     }
     return newArr;
@@ -40,7 +42,7 @@ function mapArray(el, callBackFun) {
     return [...el];
 }
 
-console.log(mapArray([two, `${five}`, eight], function(el) {
+console.log(mapArray([one, `${two}`, three], function(el) {
     return parseInt(el) + three;
 }));
 
@@ -56,7 +58,7 @@ function filterArray(el, callBackFun) {
     }
     return filteredArray;
 }
-console.log(filterArray([two, five, eight], function(el) {
+console.log(filterArray([one, two, three, ten], function(el) {
     return el % two === 0;
 }));
 
@@ -84,14 +86,30 @@ console.log(makeListFromRange([two, seven]));
 
 
 
-/*function getArrayOfKeys() {
+/*function getArrayOfKeys(actors, key) {
     const actors = [
         { name: "tommy", age: 36 },
         { name: "lee", age: 28 }
     ];
-
+    executeforEach(el, callBackFun);
 }
 getArrayOfKeys(actors, "name");*/
+
+function substitute(el) {
+    let originalArray = [...el];
+    let arr = [];
+    mapArray(el, (el) => el > thirty);
+    for (let i = 0; i < el.length; i++) {
+        if (el[i]) {
+            arr = [...arr, originalArray[i]];
+        } else {
+            arr.push('*');
+        }
+    }
+    return arr;
+}
+console.log(substitute([fifty, two, forty, three]));
+
 
 
 const date = new Date(year, 0, two);
