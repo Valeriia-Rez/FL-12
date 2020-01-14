@@ -2,43 +2,42 @@ let arr = ["1", 2, 3, "4"];
 
 function convert(arg) {
     let newArr = [];
-    for (let i = 0; i < arr.length; i++) {
-        if (typeof arr[i] === "string") {
+    for (let i = 0; i < arg.length; i++) {
+        if (typeof arg[i] === "string") {
 
-            newArr.push(parseInt(arr[i]));
+            newArr.push(parseInt(arg[i]));
         } else {
-            newArr.push(String(arr[i]));
+            newArr.push(String(arg[i]));
         }
     }
     return newArr;
 }
-convert(arr);
+console.log(convert(arr));
 
 function executeforEach(el, callBackFun) {
-    for (let i = 0; i < el.length; i++) {
-        callBackFun(el[i]);
-    }
 
+    for (let i = 0; i < el.length; i++) {
+        el[i] = callBackFun(el[i]);
+    }
 }
-console.log(executeforEach([1, 2, 3], function(el) {
+executeforEach([1, 2, 3], function(el) {
     console.log(el * 2);
-}));
+});
 
 function mapArray(el, callBackFun) {
-    let arr = [];
-    for (let i = 0; i < el.length; i++) {
-        arr.push(parseInt(el[i]));
-    }
-    return arr;
-    executeforEach(arr, callBackFun);
+    executeforEach(el, callBackFun);
+    return [...el];
 }
+
 console.log(mapArray([2, "5", 8], function(el) {
-    return el + 3;
+    return parseInt(el) + 3;
 }));
 
 
 function filterArray(el, callBackFun) {
+
     executeforEach(el, callBackFun);
+    return [...el];
 }
 
 console.log(filterArray([2, 5, 8], function(el) {
