@@ -70,25 +70,50 @@ class Fighter {
 }
 
 function battle(fighter1, fighter2) {
-    const hpFighter1 = fighter1.getHealth();
-    const hpFighter2 = fighter2.getHealth();
+    let isGame = true;
+    let hpFighter1 = parseInt(fighter1.getHealth());
+    let hpFighter2 = parseInt(fighter2.getHealth());
     const nameFighter1 = fighter1.getName();
     const nameFighter2 = fighter2.getName();
     if (hpFighter1 === 0) {
+        isGame = false;
         console.log(`${nameFighter1} is dead and can't fight`);
     } else if (hpFighter2 === 0) {
+        isGame = false;
         console.log(`${nameFighter2} is dead and can't fight`);
-    } else {
-        console.log("run", hpFighter1, hpFighter2);
-        while (hpFighter1 && hpFighter2) {
-            fighter1.attack(fighter2);
-            fighter2.attack(fighter1);
+    }
+    while (isGame) {
+        fighter1.attack(fighter2);
+        fighter2.attack(fighter1);
+        hpFighter1 = parseInt(fighter1.getHealth());
+        hpFighter2 = parseInt(fighter2.getHealth());
+        if (hpFighter1 === 0) {
+            isGame = false;
+            fighter1.addLoss();
+            fighter2.addWin();
+            console.log(`${nameFighter2} has won!`);
+        } else if (hpFighter2 === 0) {
+            isGame = false;
+            fighter2.addLoss();
+            fighter1.addWin();
+            console.log(`${nameFighter1} has won!`);
         }
     }
 }
 
+
+
+
 const myFighter = new Fighter('Maximus', 20, 100, 20, 15);
 const myFighter2 = new Fighter("Commodus", 25, 90, 25, 20);
+console.log(battle(myFighter, myFighter2));
+console.log(myFighter2.getHealth());
+console.log(myFighter.getHealth());
+console.log(battle(myFighter, myFighter2));
+console.log(myFighter.heal(50));
+console.log(myFighter.getHealth());
+console.log(myFighter2.logCombatHistory());
+console.log(myFighter.getStrength());
 console.log(battle(myFighter, myFighter2));
 /*console.log(myFighter);
 console.log(myFighter.getName());
