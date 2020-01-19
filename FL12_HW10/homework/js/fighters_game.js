@@ -24,11 +24,10 @@ class Fighter {
         return `${this._hp}`;
     }
     attack(defender) {
-        console.log("attack");
         const defenderStrength = parseInt(defender.getStrength());
         const defenderAgility = parseInt(defender.getAgility());
         const successAttackPercent = 100 - (defenderStrength + defenderAgility);
-        const isSuccessfull = successAttackPercent > (defenderStrength + defenderAgility);
+        const isSuccessfull = successAttackPercent > defenderStrength + defenderAgility;
         const nameFighter = this._name;
         if (isSuccessfull) {
             const damageFighter = this._damage;
@@ -105,7 +104,7 @@ function battle(fighter1, fighter2) {
 
 
 const myFighter = new Fighter('Maximus', 20, 100, 20, 15);
-const myFighter2 = new Fighter("Commodus", 25, 90, 25, 20);
+const myFighter2 = new Fighter('Commodus', 25, 90, 25, 20);
 console.log(battle(myFighter, myFighter2));
 console.log(myFighter2.getHealth());
 console.log(myFighter.getHealth());
