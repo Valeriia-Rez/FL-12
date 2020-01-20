@@ -1,3 +1,10 @@
+const totalHp = 100;
+const twenty = 20;
+const fifteen = 15;
+const twentyFive = 25;
+const ninety = 90;
+const fifty = 50;
+
 class Fighter {
     constructor(name, damage, hp, strength, agility) {
         this._name = name;
@@ -26,8 +33,9 @@ class Fighter {
     attack(defender) {
         const defenderStrength = parseInt(defender.getStrength());
         const defenderAgility = parseInt(defender.getAgility());
-        const successAttackPercent = 100 - (defenderStrength + defenderAgility);
-        const isSuccessfull = successAttackPercent > defenderStrength + defenderAgility;
+        const randomNumber = Math.floor(Math.random() * totalHp + 1);
+        const successAttackPercent = totalHp - (defenderStrength + defenderAgility);
+        const isSuccessfull = successAttackPercent > randomNumber;
         const nameFighter = this._name;
         if (isSuccessfull) {
             const damageFighter = this._damage;
@@ -46,8 +54,8 @@ class Fighter {
     heal(hp) {
         const hpSum = this._hp + hp;
 
-        if (hpSum > 100) {
-            this._hp = 100;
+        if (hpSum > totalHp) {
+            this._hp = totalHp;
         } else {
             this._hp = hpSum;
         }
@@ -64,7 +72,7 @@ class Fighter {
         this._wins += 1;
     }
     addLoss() {
-        this._losses -= 1;
+        this._losses += 1;
     }
 }
 
@@ -103,27 +111,26 @@ function battle(fighter1, fighter2) {
 
 
 
-const myFighter = new Fighter('Maximus', 20, 100, 20, 15);
-const myFighter2 = new Fighter('Commodus', 25, 90, 25, 20);
-console.log(battle(myFighter, myFighter2));
-console.log(myFighter2.getHealth());
-console.log(myFighter.getHealth());
-console.log(battle(myFighter, myFighter2));
-console.log(myFighter.heal(50));
-console.log(myFighter.getHealth());
-console.log(myFighter2.logCombatHistory());
-console.log(myFighter.getStrength());
-console.log(battle(myFighter, myFighter2));
-/*console.log(myFighter);
-console.log(myFighter.getName());
-console.log(myFighter.getDamage());
-console.log(myFighter.getStrength());
-console.log(myFighter.getAgility());
-console.log(myFighter.getHealth());
-console.log(myFighter.attack(myFighter2));
-console.log(myFighter2.attack(myFighter));
-console.log(myFighter.logCombatHistory());
-myFighter.heal(50);
-myFighter.dealDamage(50);
-console.log(myFighter.addWin());
-console.log(myFighter.addLoss());*/
+const myFighter = new Fighter('Maximus', twenty, totalHp, twenty, fifteen);
+const myFighter2 = new Fighter('Commodus', twentyFive, ninety, twentyFive, twenty);
+battle(myFighter, myFighter2);
+myFighter2.getHealth();
+myFighter.getHealth();
+battle(myFighter, myFighter2);
+myFighter.heal(fifty);
+myFighter.getHealth();
+myFighter2.logCombatHistory();
+myFighter.getStrength();
+battle(myFighter, myFighter2);
+myFighter.getName();
+myFighter.getDamage();
+myFighter.getStrength();
+myFighter.getAgility();
+myFighter.getHealth();
+myFighter.attack(myFighter2);
+myFighter2.attack(myFighter);
+myFighter.logCombatHistory();
+myFighter.heal(fifty);
+myFighter.dealDamage(fifty);
+myFighter.addWin();
+myFighter.addLoss();
