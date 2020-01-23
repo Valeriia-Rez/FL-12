@@ -32,8 +32,17 @@ const structure = [{
 
 const rootNode = document.getElementById('root');
 
+function generateLiWithContent(liContentText) {
+    const li = document.createElement("li");
+    const liContent = document.createTextNode(liContentText);
+    li.appendChild(liContent);
+    return li;
+}
+
 function walkThroughObject(item) {
     const ul = document.createElement("ul");
+    ul.id = item.title;
+    ul.className = " hide";
     item.children.forEach(function(innerItemEl) {
         const li = document.createElement("li");
         const liContent = document.createTextNode(innerItemEl.title);
@@ -41,13 +50,21 @@ function walkThroughObject(item) {
         if (innerItemEl.folder && innerItemEl.children) {
             const test = walkThroughObject(innerItemEl);
             li.appendChild(test);
+            li.addEventListener("click", (e) => {
+                e.stopPropagation();
+                onSectionClick(innerItemEl.title)
+            });
             ul.appendChild(li);
         } else if (innerItemEl.folder && !innerItemEl.children && innerItemEl.children !== "undefined") {
             const innerUl = document.createElement("ul");
-            const innerLi = document.createElement("li");
-            const innerLiContent = document.createTextNode("Folder is empty");
-            innerLi.appendChild(innerLiContent);
+            innerUl.className = " hide";
+            innerUl.id = innerItemEl.title;
+            const innerLi = generateLiWithContent("Folder is Empty");
             innerUl.appendChild(innerLi);
+            li.addEventListener("click", (e) => {
+                e.stopPropagation();
+                onSectionClick(innerItemEl.title);
+            });
             li.appendChild(innerUl);
             ul.appendChild(li);
         } else {
@@ -57,15 +74,27 @@ function walkThroughObject(item) {
     return ul;
 }
 
+function onSectionClick(id) {
+
+    const element = document.getElementById(id);
+    if (element.className.indexOf("show") == -1) {
+        element.className += " show";
+    } else {
+        element.className = element.className.replace(" show", " hide");
+    }
+}
+
 function createTree() {
     const testUl = document.createElement("ul");
     structure.forEach(function(el) {
-        const testLi = document.createElement("li");
-        const testLiContent = document.createTextNode(el.title);
-        testLi.appendChild(testLiContent);
-        const testLiElements = walkThroughObject(el);
-        testLi.appendChild(testLiElements);
-        testUl.appendChild(testLi);
+        const li = generateLiWithContent(el.title);
+        li.addEventListener("click", (e) => {
+            e.stopPropagation();
+            onSectionClick(el.title)
+        });
+        const liInnerItems = walkThroughObject(el);
+        li.appendChild(liInnerItems);
+        testUl.appendChild(li);
     })
     rootNode.appendChild(testUl);
 }
