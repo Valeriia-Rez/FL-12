@@ -40,19 +40,22 @@ function createTree() {
         const li = document.createElement("li");
         li.appendChild(document.createTextNode(el.title));
         li.addEventListener("click", open);
+        const ul2 = document.createElement("ul");
+        const li2 = document.createElement("li");
+        li2.appendChild(document.createTextNode(el.children));
+        li.appendChild(li2);
+
+        li2.style.display = "none";
         ul.appendChild(li);
 
-    })
+        function open() {
+            li2.style.display = "block";
+        }
+    });
     rootNode.appendChild(ul);
+
+
+
+
 }
-createTree();
-
-/*function open() {
-
-    const childUl = document.createElement("ul");
-    structure.children[].forEach(function(el) {
-        const childLi = document.createElement("li");
-        childLi.appendChild(document.createTextNode(el.title));
-        childUl.appendChild(childLi);
-    })
-}*/
+console.log(createTree());
