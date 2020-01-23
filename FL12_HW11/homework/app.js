@@ -32,30 +32,43 @@ const structure = [{
 
 const rootNode = document.getElementById('root');
 
-
+function walkThroughObject(item) {
+    const ul = document.createElement("ul");
+    item.children.forEach(function(innerItemEl) {
+        const li = document.createElement("li");
+        const liContent = document.createTextNode(innerItemEl.title);
+        li.appendChild(liContent);
+        if (innerItemEl.folder && innerItemEl.children) {
+            const test = walkThroughObject(innerItemEl);
+            li.appendChild(test);
+            ul.appendChild(li);
+        } else if (innerItemEl.folder && !innerItemEl.children && innerItemEl.children !== "undefined") {
+            const innerUl = document.createElement("ul");
+            const innerLi = document.createElement("li");
+            const innerLiContent = document.createTextNode("Folder is empty");
+            innerLi.appendChild(innerLiContent);
+            innerUl.appendChild(innerLi);
+            li.appendChild(innerUl);
+            ul.appendChild(li);
+        } else {
+            ul.appendChild(li);
+        }
+    })
+    return ul;
+}
 
 function createTree() {
-    const ul = document.createElement("ul");
+    const testUl = document.createElement("ul");
     structure.forEach(function(el) {
-        const li = document.createElement("li");
-        li.appendChild(document.createTextNode(el.title));
-        li.addEventListener("click", open);
-        const ul2 = document.createElement("ul");
-        const li2 = document.createElement("li");
-        li2.appendChild(document.createTextNode(el.children));
-        li.appendChild(li2);
-
-        li2.style.display = "none";
-        ul.appendChild(li);
-
-        function open() {
-            li2.style.display = "block";
-        }
-    });
-    rootNode.appendChild(ul);
-
-
-
-
+        const testLi = document.createElement("li");
+        const testLiContent = document.createTextNode(el.title);
+        testLi.appendChild(testLiContent);
+        const testLiElements = walkThroughObject(el);
+        testLi.appendChild(testLiElements);
+        testUl.appendChild(testLi);
+    })
+    rootNode.appendChild(testUl);
 }
+
+
 console.log(createTree());
