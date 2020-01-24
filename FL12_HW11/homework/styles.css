@@ -7,3 +7,11 @@
 .show {
     display: block;
 }
+
+ul {
+    list-style: none;
+}
+
+.material-icons {
+    color: yellow;
+}

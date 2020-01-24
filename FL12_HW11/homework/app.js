@@ -34,8 +34,7 @@ const rootNode = document.getElementById('root');
 
 function generateLiWithContent(liContentText) {
     const li = document.createElement("li");
-    const liContent = document.createTextNode(liContentText);
-    li.appendChild(liContent);
+    li.innerHTML = `<a><i class="material-icons">folder</i><span>${liContentText}</span></a>`
     return li;
 }
 
@@ -44,10 +43,8 @@ function walkThroughObject(item) {
     ul.id = item.title;
     ul.className = " hide";
     item.children.forEach(function(innerItemEl) {
-        const li = document.createElement("li");
-        const liContent = document.createTextNode(innerItemEl.title);
-        li.appendChild(liContent);
         if (innerItemEl.folder && innerItemEl.children) {
+            const li = generateLiWithContent(innerItemEl.title);
             const test = walkThroughObject(innerItemEl);
             li.appendChild(test);
             li.addEventListener("click", (e) => {
@@ -56,18 +53,26 @@ function walkThroughObject(item) {
             });
             ul.appendChild(li);
         } else if (innerItemEl.folder && !innerItemEl.children && innerItemEl.children !== "undefined") {
+            const li = generateLiWithContent(innerItemEl.title);
             const innerUl = document.createElement("ul");
             innerUl.className = " hide";
             innerUl.id = innerItemEl.title;
-            const innerLi = generateLiWithContent("Folder is Empty");
+
+            const innerLi = document.createElement("li");
+            innerLi.appendChild(document.createTextNode("Folder is empty"));
+
             innerUl.appendChild(innerLi);
+
             li.addEventListener("click", (e) => {
                 e.stopPropagation();
                 onSectionClick(innerItemEl.title);
             });
             li.appendChild(innerUl);
+
             ul.appendChild(li);
         } else {
+            const li = document.createElement("li");
+            li.appendChild(document.createTextNode(innerItemEl.title));
             ul.appendChild(li);
         }
     })
@@ -94,10 +99,24 @@ function createTree() {
         });
         const liInnerItems = walkThroughObject(el);
         li.appendChild(liInnerItems);
+
         testUl.appendChild(li);
+
     })
     rootNode.appendChild(testUl);
 }
 
 
 console.log(createTree());
+let arr = [1, -2, 3, 4];
+
+function getMin(el) {
+    let min = el[0];
+    for (let i = 0; i < el.length; i++) {
+        if (min > el[i]) {
+            min = el[i];
+        }
+    }
+    return min;
+}
+console.log("hh", getMin(arr));
