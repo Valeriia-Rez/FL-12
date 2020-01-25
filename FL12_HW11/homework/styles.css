@@ -15,3 +15,16 @@ ul {
 .material-icons {
     color: yellow;
 }
+
+.liFile i {
+    color: lightgray;
+}
+
+.select:hover {
+    background-color: rgb(236, 235, 235);
+}
+
+.select {
+    display: flex;
+    align-items: center;
+}
