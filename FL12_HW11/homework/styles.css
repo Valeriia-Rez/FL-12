@@ -27,4 +27,14 @@ ul {
 .select {
     display: flex;
     align-items: center;
+    cursor: pointer;
+}
+
+.circle {
+    position: absolute;
+    background-color: rgba(243, 97, 97, 0.466);
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    border-radius: 50%;
 }

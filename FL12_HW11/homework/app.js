@@ -31,6 +31,10 @@ const structure = [{
 ];
 
 const rootNode = document.getElementById('root');
+const minusOne = -1;
+const eight = 8;
+const onClickCircle = document.createElement('div');
+document.body.appendChild(onClickCircle);
 
 function generateLiWithContent(liContentText, iconName) {
     const li = document.createElement('li');
@@ -38,78 +42,91 @@ function generateLiWithContent(liContentText, iconName) {
     return li;
 }
 
-function walkThroughObject(item) {
+function onMouseDown(e) {
+    onClickCircle.style.left = e.pageX - eight + 'px';
+    onClickCircle.style.top = e.pageY - eight + 'px';
+    onClickCircle.classList.add('circle');
+}
+
+function onMouseUp(e) {
+    onClickCircle.style.left = e.pageX - eight + 'px';
+    onClickCircle.style.top = e.pageY - eight + 'px';
+    onClickCircle.classList.remove('circle');
+}
+
+function onSectionClick(id) {
+    const element = document.getElementById(id);
+    const parentElem = element.parentElement;
+    const icon = parentElem.querySelector('.material-icons');
+    if (element.className.indexOf('show') === minusOne) {
+        element.className += ' show';
+        icon.innerText = 'folder_open';
+    } else {
+        element.className = element.className.replace(' show', ' hide');
+        icon.innerText = 'folder';
+    }
+}
+
+function walkThroughFolders(item) {
     const ul = document.createElement('ul');
     ul.id = item.title;
     ul.className = ' hide';
     item.children.forEach(function(innerItemEl) {
         if (innerItemEl.folder && innerItemEl.children) {
-            const li = generateLiWithContent(innerItemEl.title, "folder");
-            const test = walkThroughObject(innerItemEl);
-            li.appendChild(test);
+            const li = generateLiWithContent(innerItemEl.title, 'folder');
+            const liInnerItems = walkThroughFolders(innerItemEl);
+            li.appendChild(liInnerItems);
             li.addEventListener('click', (e) => {
                 e.stopPropagation();
-                onSectionClick(innerItemEl.title)
+                onSectionClick(innerItemEl.title);
+
             });
+            li.addEventListener('mousedown', onMouseDown);
+            li.addEventListener('mouseup', onMouseUp);
             ul.appendChild(li);
         } else if (innerItemEl.folder && !innerItemEl.children && innerItemEl.children !== 'undefined') {
-            const li = generateLiWithContent(innerItemEl.title, "folder");
+            const li = generateLiWithContent(innerItemEl.title, 'folder');
             const innerUl = document.createElement('ul');
+            const innerLi = document.createElement('li');
             innerUl.className = ' hide';
             innerUl.id = innerItemEl.title;
-
-            const innerLi = document.createElement('li');
-            innerLi.className = "select";
+            innerLi.className = 'select';
             innerLi.appendChild(document.createTextNode('Folder is empty'));
-            innerLi.style.fontStyle = "italic";
+            innerLi.style.fontStyle = 'italic';
             innerUl.appendChild(innerLi);
-
             li.addEventListener('click', (e) => {
                 e.stopPropagation();
                 onSectionClick(innerItemEl.title);
             });
+            li.addEventListener('mousedown', onMouseDown);
+            li.addEventListener('mouseup', onMouseUp);
             li.appendChild(innerUl);
-
             ul.appendChild(li);
         } else {
-            const li = generateLiWithContent(innerItemEl.title, "insert_drive_file");
-            li.className = "liFile";
+            const li = generateLiWithContent(innerItemEl.title, 'insert_drive_file');
+            li.className = 'liFile';
             ul.appendChild(li);
         }
     })
     return ul;
 }
 
-function onSectionClick(id) {
-
-    const element = document.getElementById(id);
-    const parentElem = element.parentElement;
-    const icon = parentElem.querySelector(".material-icons");
-    if (element.className.indexOf('show') === -1) {
-        element.className += ' show';
-        icon.innerText = "folder_open";
-    } else {
-        element.className = element.className.replace(' show', ' hide');
-        icon.innerText = "folder";
-    }
-}
 
 function createTree() {
     const testUl = document.createElement('ul');
     structure.forEach(function(el) {
-        const li = generateLiWithContent(el.title, "folder");
+        const li = generateLiWithContent(el.title, 'folder');
         li.addEventListener('click', (e) => {
             e.stopPropagation();
             onSectionClick(el.title);
-
         });
-        const liInnerItems = walkThroughObject(el);
+        li.addEventListener('mousedown', onMouseDown);
+        li.addEventListener('mouseup', onMouseUp);
+        const liInnerItems = walkThroughFolders(el);
         li.appendChild(liInnerItems);
         testUl.appendChild(li);
-
-    })
+    });
     rootNode.appendChild(testUl);
 }
-
 
 createTree();
