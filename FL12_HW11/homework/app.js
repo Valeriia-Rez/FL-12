@@ -79,7 +79,6 @@ function walkThroughFolders(item) {
             li.addEventListener('click', (e) => {
                 e.stopPropagation();
                 onSectionClick(innerItemEl.title);
-
             });
             li.addEventListener('mousedown', onMouseDown);
             li.addEventListener('mouseup', onMouseUp);
@@ -110,7 +109,6 @@ function walkThroughFolders(item) {
     })
     return ul;
 }
-
 
 function createTree() {
     const testUl = document.createElement('ul');
