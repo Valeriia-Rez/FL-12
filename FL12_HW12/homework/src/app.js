@@ -141,13 +141,26 @@ class MainPageUI {
 }
 
 class AddNewSetUI {
-    constructor() {
-        this.addTermsClicked = false;
-    }
     render() {
-        return `<p>Add New Set UI</p>`;
+        return `
+        <div class="newSet">
+        <p>Name: <input type="text" placeholder="Name"/></p>
+        <button class="addTermsButton">Add terms</button>
+        <button>Save changes</button>
+        <button route="/">Cancel</button>
+        <div class="newSetTerms"></div>
+        </div>`;
+    }
+    addTerms() {
+        console.log("fff");
+        const newSetTerms = document.querySelector(".newSetTerms");
+        const termsTemplate = `<p>Term <input type="text" placeholder="Enter term"/></p>
+        <p>Definition <input type="text" placeholder="Enter definition"/></p>
+        <button>Remove</button></<p>`;
+        newSetTerms.innerHTML = termsTemplate;
     }
 }
+
 
 class ModifySetUI {
     constructor(set) {
@@ -159,11 +172,12 @@ class ModifySetUI {
     }
 }
 const mainPage = new MainPageUI(state.sets);
+const addNewSetPage = new AddNewSetUI();
 const renderMainPageController = () => {
     return mainPage.render();
 }
 const renderAddNewSetController = () => {
-    const addNewSetPage = new AddNewSetUI();
+
     return addNewSetPage.render();
 }
 const renderModifySetContoller = (props) => {
@@ -217,17 +231,32 @@ const complitedSet = (e) => {
     });
     state.sets = sortedAndUpdatedSets;
     mainPage.reorderSets(state.sets);
-    addSetItemClickHandler();
+    complitedSetClickHandler();
 }
 
-const removeSetButtons = document.querySelectorAll(".removeSetButton");
-removeSetButtons.forEach(button => {
-    button.addEventListener("click", removeSet);
-});
-const addSetItemClickHandler = () => {
+const addTerms = () => {
+    console.log("clicked");
+    return addNewSetPage.addTerms();
+
+}
+const removeSetButtonClickHandler = () => {
+    const removeSetButtons = document.querySelectorAll(".removeSetButton");
+    removeSetButtons.forEach(button => {
+        button.addEventListener("click", removeSet);
+    });
+}
+const complitedSetClickHandler = () => {
     const setItemElem = document.querySelectorAll(".setItem");
     setItemElem.forEach(element => {
         element.addEventListener("click", complitedSet);
     });
 }
-addSetItemClickHandler();
+
+
+const addTermsClickHandler = () => {
+    const addTermsButton = document.querySelector(".addTermsButton");
+    addTermsButton.addEventListener("click", addTerms);
+}
+removeSetButtonClickHandler();
+complitedSetClickHandler();
+addTermsClickHandler();
