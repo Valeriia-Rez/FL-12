@@ -62,12 +62,72 @@ const router = (routes) => {
     window.addEventListener('hashchange', e => router.navigate(e.target.location.hash.substr(1)));
 }
 
-let mainPage = () => `<p>main page</p>`;
+/*let mainPage = () => `<p>main page</p>`;*/
 let addNewSet = () => `<p>addNewSet</p>`;
 let modifySet = (props) => `<p>${props.id}modifySet</p>`;
+
+class Set {
+    constructor(set) {
+        this.set = set;
+    }
+    render() {
+        console.log(this.set);
+        return `<p>${this.set.name},${this.set.term},${this.set.definition}</p>`;
+    }
+}
+class MainPageUI {
+    constructor(sets) {
+        this.sets = sets;
+    }
+
+    render() {
+        return this.sets.map((set) => {
+            const setUI = new Set(set);
+            return setUI.render();
+        });
+    }
+}
+
+class AddNewSetUI {
+    constructor() {
+        this.addTermsClicked = false;
+    }
+    render() {
+        return `<p>Add New Set UI</p>`;
+    }
+
+}
+
+class ModifySetUI {
+    constructor(set) {
+        this.set = set;
+    }
+    render() {
+        const setUI = new Set(this.set);
+        return setUI.render();
+    }
+}
+
+const renderMainPageController = () => {
+    const mainPage = new MainPageUI([{ name: "Lera", term: "Rieznik", definition: "developer" }, { name: "Anna", term: "Vihrogonova", definition: "good developer" }]);
+    return mainPage.render();
+}
+const renderAddNewSetController = () => {
+    const addNewSetPage = new AddNewSetUI();
+    return addNewSetPage.render();
+}
+const renderModifySetContoller = (props) => {
+    console.log(props.id);
+    const modifySetPage = new ModifySetUI({ name: "Lera", term: "Rieznik", definition: "developer" });
+    return modifySetPage.render();
+}
+
 const routes = [
-    new Route('main', '/', mainPage),
-    new Route('add', '/add', addNewSet),
-    new Route('modify', '/modify/:id', modifySet)
+    new Route('main', '/', renderMainPageController),
+    new Route('add', '/add', renderAddNewSetController),
+    new Route('modify', '/modify/:id', renderModifySetContoller)
 ];
+
+
+
 router(routes);
