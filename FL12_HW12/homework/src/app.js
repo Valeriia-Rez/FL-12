@@ -66,9 +66,11 @@ const router = (routes) => {
 
 
 const state = {
-    sets: [{ name: "Lera", term: "Rieznik", definition: "developer", id: "1" },
-        { name: "Anna", term: "Vihrogonova", definition: "good developer", id: "2" }
+    sets: [{ name: "Lera", term: "Rieznik", definition: "developer", id: "1", complited: false },
+        { name: "Anna", term: "Vihrogonova", definition: "good developer", id: "2", complited: false },
+        { name: "Eva", term: "Reznik", definition: "child", id: "3", complited: false }
     ]
+
 }
 
 
@@ -79,14 +81,11 @@ class Set {
     }
     render() {
         const template = `
-       <div data-id="${this.set.id}">
+       <div class="setItem" data-id="${this.set.id}">
             <h1>${this.set.name}</h1>
-            <div>
-                <p>Term: ${this.set.term}</p>
-                <p>Definition: ${this.set.definition}</p>
-              </div>
-           
-       </div>`
+            <p>Term: ${this.set.term}</p>
+            <p>Definition: ${this.set.definition}</p>
+        </div>`
         return template;
     }
 
@@ -96,21 +95,24 @@ class Set {
 class MainPageUI {
     constructor(sets) {
         this.sets = sets;
+
     }
 
-    render() {
-        const generatedSets = this.generateSets();
+
+    render(sets = this.sets) {
+        console.log(sets, "clicked");
+        const generatedSets = this.generateSets(sets);
         const template = `
             <div>
                 <button route="/add">Add New</button>
-                <ul>${generatedSets}</ul>
+                <ul class="setsList">${generatedSets}</ul>
             </div>
         `
         return template;
     }
 
-    generateSets() {
-        return this.sets.map((set) => {
+    generateSets(sets) {
+        return sets.map((set) => {
             const setUI = new Set(set);
             const setHtml = setUI.render();
             const template = ` 
@@ -130,6 +132,11 @@ class MainPageUI {
         if (item) {
             item.parentElement.removeChild(item);
         }
+    }
+    reorderSets(sets) {
+        const reorderedSet = this.generateSets(sets);
+        const list = document.querySelector(".setsList");
+        list.innerHTML = reorderedSet;
     }
 }
 
@@ -189,7 +196,38 @@ const removeSet = (e) => {
     mainPage.removeSet(setId);
 }
 
+const complitedSet = (e) => {
+    e.preventDefault();
+    const setId = e.target.parentNode.dataset.id;
+    const findedSet = state.sets.find(set => setId === set.id);
+    const updatedSet = {
+        ...findedSet,
+        complited: true
+    }
+    const oldState = [...state.sets];
+    const updatedSets = oldState.map(el => {
+        if (el.id === setId) {
+            return updatedSet;
+        }
+        return el;
+    });
+    const sortedAndUpdatedSets = updatedSets.sort((item1, item2) => {
+        return item1.complited - item2.complited;
+
+    });
+    state.sets = sortedAndUpdatedSets;
+    mainPage.reorderSets(state.sets);
+    addSetItemClickHandler();
+}
+
 const removeSetButtons = document.querySelectorAll(".removeSetButton");
 removeSetButtons.forEach(button => {
-    return button.addEventListener("click", removeSet);
+    button.addEventListener("click", removeSet);
 });
+const addSetItemClickHandler = () => {
+    const setItemElem = document.querySelectorAll(".setItem");
+    setItemElem.forEach(element => {
+        element.addEventListener("click", complitedSet);
+    });
+}
+addSetItemClickHandler();
