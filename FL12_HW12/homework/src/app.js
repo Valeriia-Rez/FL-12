@@ -62,29 +62,74 @@ const router = (routes) => {
     window.addEventListener('hashchange', e => router.navigate(e.target.location.hash.substr(1)));
 }
 
-/*let mainPage = () => `<p>main page</p>`;*/
-let addNewSet = () => `<p>addNewSet</p>`;
-let modifySet = (props) => `<p>${props.id}modifySet</p>`;
+
+
+
+const state = {
+    sets: [{ name: "Lera", term: "Rieznik", definition: "developer", id: "1" },
+        { name: "Anna", term: "Vihrogonova", definition: "good developer", id: "2" }
+    ]
+}
+
+
 
 class Set {
     constructor(set) {
         this.set = set;
     }
     render() {
-        console.log(this.set);
-        return `<p>${this.set.name},${this.set.term},${this.set.definition}</p>`;
+        const template = `
+       <div data-id="${this.set.id}">
+            <h1>${this.set.name}</h1>
+            <div>
+                <p>Term: ${this.set.term}</p>
+                <p>Definition: ${this.set.definition}</p>
+              </div>
+           
+       </div>`
+        return template;
     }
+
 }
+
+
 class MainPageUI {
     constructor(sets) {
         this.sets = sets;
     }
 
     render() {
+        const generatedSets = this.generateSets();
+        const template = `
+            <div>
+                <button route="/add">Add New</button>
+                <ul>${generatedSets}</ul>
+            </div>
+        `
+        return template;
+    }
+
+    generateSets() {
         return this.sets.map((set) => {
             const setUI = new Set(set);
-            return setUI.render();
-        });
+            const setHtml = setUI.render();
+            const template = ` 
+            <li data-id="${set.id}">
+                ${setHtml}
+            <div>
+                <button route="/modify/${set.id}">Edit</button>
+                <button data-id="${set.id}" class="removeSetButton">Remove</button>
+            </div>
+            </li>`
+            return template;
+        }).join("");
+
+    }
+    removeSet(elemId) {
+        const item = document.querySelector(`[data-id="${elemId}"]`);
+        if (item) {
+            item.parentElement.removeChild(item);
+        }
     }
 }
 
@@ -95,7 +140,6 @@ class AddNewSetUI {
     render() {
         return `<p>Add New Set UI</p>`;
     }
-
 }
 
 class ModifySetUI {
@@ -107,9 +151,8 @@ class ModifySetUI {
         return setUI.render();
     }
 }
-
+const mainPage = new MainPageUI(state.sets);
 const renderMainPageController = () => {
-    const mainPage = new MainPageUI([{ name: "Lera", term: "Rieznik", definition: "developer" }, { name: "Anna", term: "Vihrogonova", definition: "good developer" }]);
     return mainPage.render();
 }
 const renderAddNewSetController = () => {
@@ -117,9 +160,16 @@ const renderAddNewSetController = () => {
     return addNewSetPage.render();
 }
 const renderModifySetContoller = (props) => {
-    console.log(props.id);
-    const modifySetPage = new ModifySetUI({ name: "Lera", term: "Rieznik", definition: "developer" });
-    return modifySetPage.render();
+    const findedSet = state.sets.find(set => {
+        return props.id === set.id
+    });
+    let modifySetPage;
+    if (findedSet) {
+        modifySetPage = new ModifySetUI(findedSet).render();
+    } else {
+        modifySetPage = `<p>Error</p>`;
+    }
+    return modifySetPage;
 }
 
 const routes = [
@@ -128,6 +178,18 @@ const routes = [
     new Route('modify', '/modify/:id', renderModifySetContoller)
 ];
 
-
-
 router(routes);
+
+
+const removeSet = (e) => {
+    e.preventDefault();
+    const setId = e.target.dataset.id;
+    const updatedListOfSets = state.sets.filter(set => setId !== set.id);
+    state.sets = updatedListOfSets;
+    mainPage.removeSet(setId);
+}
+
+const removeSetButtons = document.querySelectorAll(".removeSetButton");
+removeSetButtons.forEach(button => {
+    return button.addEventListener("click", removeSet);
+});
