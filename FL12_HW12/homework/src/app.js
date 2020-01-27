@@ -117,22 +117,16 @@ class StorageCtrl {
     clearItemsFromStorage() {
         localStorage.removeItem("items");
     }
+    storeItems(items) {
+        localStorage.setItem("items", JSON.stringify(items));
+    }
 }
-
-
-
 
 
 
 const state = {
-    sets: [{ name: "Lera", term: "Rieznik", definition: "developer", id: "1", complited: false },
-        { name: "Anna", term: "Vihrogonova", definition: "good developer", id: "2", complited: false },
-        { name: "Eva", term: "Reznik", definition: "child", id: "3", complited: false }
-    ]
-
+    sets: []
 }
-
-
 
 class Set {
     constructor(set) {
@@ -235,8 +229,12 @@ const mainPage = new MainPageUI();
 const addNewSetPage = new AddNewSetUI();
 const localStore = new StorageCtrl();
 const renderMainPageController = () => {
+    console.log("render");
     const sets = localStore.getItemsFromStorage();
-    return mainPage.render(sets);
+    if (sets.length > 0) {
+        state.sets = sets;
+    }
+    return mainPage.render(state.sets);
 }
 const renderAddNewSetController = () => {
 
@@ -267,9 +265,11 @@ router(routes);
 const removeSet = (e) => {
     e.preventDefault();
     const setId = e.target.dataset.id;
-    const updatedListOfSets = state.sets.filter(set => setId !== set.id);
-    state.sets = updatedListOfSets;
+    localStore.deleteItemFromStorage(setId);
+    const updatedSets = localStore.getItemsFromStorage();
+    state.sets = updatedSets;
     mainPage.removeSet(setId);
+    removeSetButtonClickHandler();
 }
 
 const complitedSet = (e) => {
@@ -280,25 +280,21 @@ const complitedSet = (e) => {
         ...findedSet,
         complited: true
     }
-    const oldState = [...state.sets];
-    const updatedSets = oldState.map(el => {
-        if (el.id === setId) {
-            return updatedSet;
-        }
-        return el;
-    });
+    localStore.updateItemStorage(updatedSet);
+    const updatedSets = localStore.getItemsFromStorage();
     const sortedAndUpdatedSets = updatedSets.sort((item1, item2) => {
         return item1.complited - item2.complited;
-
     });
+    localStore.storeItems(sortedAndUpdatedSets);
     state.sets = sortedAndUpdatedSets;
     mainPage.reorderSets(state.sets);
     complitedSetClickHandler();
 }
 
 const addTerms = () => {
-    console.log("clicked");
+    addTermsClickHandler();
     return addNewSetPage.addTerms();
+
 }
 
 const saveNewSet = () => {
