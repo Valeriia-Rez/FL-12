@@ -63,6 +63,65 @@ const router = (routes) => {
 }
 
 
+class StorageCtrl {
+    storeItem(set) {
+        let items;
+        // Check if any items in ls
+        if (localStorage.getItem("items") === null) {
+            items = [];
+            // Push new item
+            items.push(set);
+            // Set ls
+            localStorage.setItem("items", JSON.stringify(items));
+        } else {
+            // Get what is already in ls
+            items = JSON.parse(localStorage.getItem("items"));
+
+            // Push new item
+            items.push(set);
+
+            // Re set ls
+            localStorage.setItem("items", JSON.stringify(items));
+        }
+    }
+
+    getItemsFromStorage() {
+        let items;
+        if (localStorage.getItem("items") === null) {
+            items = [];
+        } else {
+            items = JSON.parse(localStorage.getItem("items"));
+        }
+        return items;
+    }
+    updateItemStorage(updatedItem) {
+        let items = JSON.parse(localStorage.getItem("items"));
+
+        items.forEach(function(item, index) {
+            if (updatedItem.id === item.id) {
+                items.splice(index, 1, updatedItem);
+            }
+        });
+        localStorage.setItem("items", JSON.stringify(items));
+    }
+    deleteItemFromStorage(id) {
+        let items = JSON.parse(localStorage.getItem("items"));
+
+        items.forEach(function(item, index) {
+            if (id === item.id) {
+                items.splice(index, 1);
+            }
+        });
+        localStorage.setItem("items", JSON.stringify(items));
+    }
+    clearItemsFromStorage() {
+        localStorage.removeItem("items");
+    }
+}
+
+
+
+
 
 
 const state = {
@@ -144,9 +203,9 @@ class AddNewSetUI {
     render() {
         return `
         <div class="newSet">
-        <p>Name: <input type="text" placeholder="Name"/></p>
+        <p>Name: <input type="text" class="setName" placeholder="Name"/></p>
         <button class="addTermsButton">Add terms</button>
-        <button>Save changes</button>
+        <button class="saveNewSetButton">Save changes</button>
         <button route="/">Cancel</button>
         <div class="newSetTerms"></div>
         </div>`;
@@ -154,11 +213,12 @@ class AddNewSetUI {
     addTerms() {
         console.log("fff");
         const newSetTerms = document.querySelector(".newSetTerms");
-        const termsTemplate = `<p>Term <input type="text" placeholder="Enter term"/></p>
-        <p>Definition <input type="text" placeholder="Enter definition"/></p>
+        const termsTemplate = `<p>Term <input type="text" class="setTerm" placeholder="Enter term"/></p>
+        <p>Definition <input type="text" class="setDefinition" placeholder="Enter definition"/></p>
         <button>Remove</button></<p>`;
         newSetTerms.innerHTML = termsTemplate;
     }
+
 }
 
 
@@ -171,10 +231,12 @@ class ModifySetUI {
         return setUI.render();
     }
 }
-const mainPage = new MainPageUI(state.sets);
+const mainPage = new MainPageUI();
 const addNewSetPage = new AddNewSetUI();
+const localStore = new StorageCtrl();
 const renderMainPageController = () => {
-    return mainPage.render();
+    const sets = localStore.getItemsFromStorage();
+    return mainPage.render(sets);
 }
 const renderAddNewSetController = () => {
 
@@ -237,8 +299,25 @@ const complitedSet = (e) => {
 const addTerms = () => {
     console.log("clicked");
     return addNewSetPage.addTerms();
-
 }
+
+const saveNewSet = () => {
+    const term = document.querySelector(".setTerm").value;
+    const definition = document.querySelector(".setDefinition").value;
+    const name = document.querySelector(".setName").value;
+    if (name) {
+        console.log(term, definition, name);
+        const newSet = { name, term, definition, complited: false, id: Math.floor(Math.random() * 500).toString() };
+
+        console.log(state.sets);
+        localStore.storeItem(newSet);
+        location.hash = "/";
+    } else {
+        console.log("Error..");
+    }
+}
+
+
 const removeSetButtonClickHandler = () => {
     const removeSetButtons = document.querySelectorAll(".removeSetButton");
     removeSetButtons.forEach(button => {
@@ -252,11 +331,15 @@ const complitedSetClickHandler = () => {
     });
 }
 
-
 const addTermsClickHandler = () => {
     const addTermsButton = document.querySelector(".addTermsButton");
     addTermsButton.addEventListener("click", addTerms);
 }
+const saveNewSetClickHandler = () => {
+    const saveNewSetButton = document.querySelector(".saveNewSetButton");
+    saveNewSetButton.addEventListener("click", saveNewSet);
+}
 removeSetButtonClickHandler();
 complitedSetClickHandler();
 addTermsClickHandler();
+saveNewSetClickHandler();
