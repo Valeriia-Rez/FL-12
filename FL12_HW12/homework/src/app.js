@@ -1,14 +1,21 @@
 class Route {
-    constructor(name, path, view) {
+    constructor(name, path, view, eventListeners) {
         this.name = name;
         this.path = path;
         this.view = view;
+        this.eventListeners = eventListeners;
+        console.log(this.eventListeners);
     }
+
     setProps(newProps) {
         this.props = newProps;
     }
     renderView() {
         return this.view(this.props);
+    }
+    addEventListeners() {
+
+        return () => this.eventListeners();
     }
 }
 
@@ -21,8 +28,6 @@ class Router {
     addRoutes(routes) {
         this.routes = [...this.routes, ...routes];
     }
-
-
     match(route, requestPath) {
         let paramNames = [];
         let regexPath = route.path.replace(/([:*])(\w+)/g, (full, colon, name) => { paramNames.push(name); return '([^\/]+)'; }) + '(?:\/|$)'
@@ -47,6 +52,10 @@ class Router {
             console.log(path);
             window.location.href = path.search('/#') === -1 ? '#' + path : path;
             this.renderNode.innerHTML = route.renderView();
+            console.log("rendered page");
+            window.addEventListener("DOMContentLoaded", route.addEventListeners());
+            console.log("dom");
+            window.addEventListener('hashchange', route.addEventListeners(), false);
         }
     }
 }
@@ -253,10 +262,35 @@ const renderModifySetContoller = (props) => {
     return modifySetPage;
 }
 
+const removeSetButtonClickHandler = () => {
+    console.log("started");
+    const removeSetButtons = document.querySelectorAll(".removeSetButton");
+    if (!removeSetButtons) return
+    removeSetButtons.forEach(button => {
+        button.addEventListener("click", removeSet);
+    });
+}
+
+const addTermsClickHandler = () => {
+    const addTermsButton = document.querySelector(".addTermsButton");
+    if (!addTermsButton) return
+    addTermsButton.addEventListener("click", addTerms);
+}
+
+const saveNewSetClickHandler = () => {
+    const saveNewSetButton = document.querySelector(".saveNewSetButton");
+    if (!saveNewSetButton) return
+    saveNewSetButton.addEventListener("click", saveNewSet);
+}
+
+const eventListenersForAddNewPage = () => {
+    addTermsClickHandler();
+    saveNewSetClickHandler();
+}
 const routes = [
-    new Route('main', '/', renderMainPageController),
-    new Route('add', '/add', renderAddNewSetController),
-    new Route('modify', '/modify/:id', renderModifySetContoller)
+    new Route('main', '/', renderMainPageController, removeSetButtonClickHandler),
+    new Route('add', '/add', renderAddNewSetController, eventListenersForAddNewPage),
+    new Route('modify', '/modify/:id', renderModifySetContoller, saveNewSetClickHandler)
 ];
 
 router(routes);
@@ -269,7 +303,7 @@ const removeSet = (e) => {
     const updatedSets = localStore.getItemsFromStorage();
     state.sets = updatedSets;
     mainPage.removeSet(setId);
-    removeSetButtonClickHandler();
+
 }
 
 const complitedSet = (e) => {
@@ -298,28 +332,23 @@ const addTerms = () => {
 }
 
 const saveNewSet = () => {
-    const term = document.querySelector(".setTerm").value;
-    const definition = document.querySelector(".setDefinition").value;
-    const name = document.querySelector(".setName").value;
+    const termEl = document.querySelector(".setTerm");
+    const definitionEl = document.querySelector(".setDefinition");
+    const nameEl = document.querySelector(".setName");
+    let term = termEl ? termEl.value : "";
+    let definition = definitionEl ? definitionEl.value : "";
+    let name = nameEl ? nameEl.value : "";
     if (name) {
-        console.log(term, definition, name);
         const newSet = { name, term, definition, complited: false, id: Math.floor(Math.random() * 500).toString() };
-
-        console.log(state.sets);
         localStore.storeItem(newSet);
-        location.hash = "/";
+        location.hash = "#/";
     } else {
         console.log("Error..");
     }
 }
 
 
-const removeSetButtonClickHandler = () => {
-    const removeSetButtons = document.querySelectorAll(".removeSetButton");
-    removeSetButtons.forEach(button => {
-        button.addEventListener("click", removeSet);
-    });
-}
+
 const complitedSetClickHandler = () => {
     const setItemElem = document.querySelectorAll(".setItem");
     setItemElem.forEach(element => {
@@ -327,15 +356,9 @@ const complitedSetClickHandler = () => {
     });
 }
 
-const addTermsClickHandler = () => {
-    const addTermsButton = document.querySelector(".addTermsButton");
-    addTermsButton.addEventListener("click", addTerms);
-}
-const saveNewSetClickHandler = () => {
-    const saveNewSetButton = document.querySelector(".saveNewSetButton");
-    saveNewSetButton.addEventListener("click", saveNewSet);
-}
-removeSetButtonClickHandler();
+
+
+
+
+
 complitedSetClickHandler();
-addTermsClickHandler();
-saveNewSetClickHandler();
